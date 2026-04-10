@@ -131,4 +131,40 @@ app.post('/api/register', async (req, res) => {
   res.status(200).json({ message: 'Transmission successful!' });
 });
 
+app.post('/api/contact', async (req, res) => {
+  let { name, email, phone, college, message } = req.body;
+  email = email ? email.trim() : "";
+  console.log(`[RECV] Contact attempt: ${name} (${email}) from ${college}`);
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: 'Name, email, and message are required.' });
+  }
+
+  const adminMailOptions = {
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_USER,
+    replyTo: email,
+    subject: `New Contact Query: ${name} — Instellation 2026`,
+    html: `
+      <h2>🚀 Incoming Transmission Received!</h2>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone || 'N/A'}</p>
+      <p><strong>College:</strong> ${college || 'N/A'}</p>
+      <hr />
+      <h3>Message Payload:</h3>
+      <p style="white-space: pre-wrap;">${message}</p>
+    `
+  };
+
+  try {
+    const adminInfo = await transporter.sendMail(adminMailOptions);
+    console.log('[SUCCESS] Contact notification sent: ' + adminInfo.response);
+    return res.status(200).json({ message: 'Transmission successful!' });
+  } catch (adminErr) {
+    console.error('[ERROR] Contact notification failed:', adminErr.message);
+    return res.status(500).json({ error: 'Failed to send the message.' });
+  }
+});
+
 app.listen(PORT, () => console.log(`Backend server listening at http://localhost:${PORT}`));

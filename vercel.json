@@ -6,6 +6,9 @@
   "functions": {
     "api/register.js": {
       "maxDuration": 30
+    },
+    "api/contact.js": {
+      "maxDuration": 30
     }
   }
 }

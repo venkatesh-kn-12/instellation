@@ -1,7 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    college: '',
+    message: ''
+  });
+  const [status, setStatus] = useState('idle');
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('submitting');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      if (res.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', phone: '', college: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus('error');
+    }
+  };
+
   return (
     <div className="page-wrapper" style={{ 
       paddingLeft: '1.2rem', 
@@ -21,6 +55,7 @@ const Contact = () => {
       </p>
 
       <motion.form 
+        onSubmit={handleSubmit}
         initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }}
         style={{ 
           width: '100%', 
@@ -40,22 +75,45 @@ const Contact = () => {
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
           <label style={{ color: 'var(--gold)', fontSize: '0.65rem', letterSpacing: '2px', fontWeight: 600 }}>TRANSMITTER ID (NAME)</label>
-          <input type="text" placeholder="Cadet Name" style={{ background: 'transparent', border: 'none', borderBottom: '1px solid rgba(201, 168, 76, 0.2)', padding: '0.8rem 0', color: '#fff', outline: 'none', fontSize: '1.1rem', fontFamily: 'var(--font-heading)' }} />
+          <input type="text" name="name" required value={formData.name} onChange={handleChange} placeholder="Cadet Name" style={{ background: 'transparent', border: 'none', borderBottom: '1px solid rgba(201, 168, 76, 0.2)', padding: '0.8rem 0', color: '#fff', outline: 'none', fontSize: '1.1rem', fontFamily: 'var(--font-heading)' }} />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
           <label style={{ color: 'var(--gold)', fontSize: '0.65rem', letterSpacing: '2px', fontWeight: 600 }}>FREQUENCY TETHER (EMAIL)</label>
-          <input type="email" placeholder="cadet@galaxy.com" style={{ background: 'transparent', border: 'none', borderBottom: '1px solid rgba(201, 168, 76, 0.2)', padding: '0.8rem 0', color: '#fff', outline: 'none', fontSize: '1.1rem', fontFamily: 'var(--font-heading)' }} />
+          <input type="email" name="email" required value={formData.email} onChange={handleChange} placeholder="cadet@galaxy.com" style={{ background: 'transparent', border: 'none', borderBottom: '1px solid rgba(201, 168, 76, 0.2)', padding: '0.8rem 0', color: '#fff', outline: 'none', fontSize: '1.1rem', fontFamily: 'var(--font-heading)' }} />
+        </div>
+
+        <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+          <div style={{ flex: '1', minWidth: '200px', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+            <label style={{ color: 'var(--gold)', fontSize: '0.65rem', letterSpacing: '2px', fontWeight: 600 }}>COMM-DEVICE (PHONE)</label>
+            <input type="tel" name="phone" required value={formData.phone} onChange={handleChange} placeholder="+91 XXXXX XXXXX" style={{ background: 'transparent', border: 'none', borderBottom: '1px solid rgba(201, 168, 76, 0.2)', padding: '0.8rem 0', color: '#fff', outline: 'none', fontSize: '1.1rem', fontFamily: 'var(--font-heading)' }} />
+          </div>
+
+          <div style={{ flex: '1', minWidth: '200px', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+            <label style={{ color: 'var(--gold)', fontSize: '0.65rem', letterSpacing: '2px', fontWeight: 600 }}>BASE ACADEMY (COLLEGE)</label>
+            <input type="text" name="college" required value={formData.college} onChange={handleChange} placeholder="College Name" style={{ background: 'transparent', border: 'none', borderBottom: '1px solid rgba(201, 168, 76, 0.2)', padding: '0.8rem 0', color: '#fff', outline: 'none', fontSize: '1.1rem', fontFamily: 'var(--font-heading)' }} />
+          </div>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
           <label style={{ color: 'var(--gold)', fontSize: '0.65rem', letterSpacing: '2px', fontWeight: 600 }}>DATA PACKET (MESSAGE)</label>
-          <textarea rows="4" placeholder="Type your message..." style={{ background: 'rgba(2, 4, 8, 0.4)', border: '1px solid rgba(201, 168, 76, 0.15)', padding: '1rem', color: '#fff', outline: 'none', marginTop: '0.5rem', resize: 'vertical', fontSize: '1rem', fontFamily: 'var(--font-body)', borderRadius: '4px' }}></textarea>
+          <textarea rows="4" name="message" required value={formData.message} onChange={handleChange} placeholder="Type your message..." style={{ background: 'rgba(2, 4, 8, 0.4)', border: '1px solid rgba(201, 168, 76, 0.15)', padding: '1rem', color: '#fff', outline: 'none', marginTop: '0.5rem', resize: 'vertical', fontSize: '1rem', fontFamily: 'var(--font-body)', borderRadius: '4px' }}></textarea>
         </div>
 
-        <button type="button" className="sub-btn" style={{ marginTop: '0.5rem' }}>
-          BROADCAST SIGNAL
+        <button type="submit" disabled={status === 'submitting'} className="sub-btn" style={{ marginTop: '0.5rem', padding: '1rem', background: 'var(--gold)', color: '#000', border: 'none', borderRadius: '4px', fontFamily: 'var(--font-heading)', fontWeight: 700, cursor: 'pointer' }}>
+          {status === 'submitting' ? 'TRANSMITTING...' : 'BROADCAST SIGNAL'}
         </button>
+
+        {status === 'success' && (
+          <div style={{ marginTop: '1rem', color: '#7de89a', fontSize: '0.86rem', textAlign: 'center', background: 'rgba(26,100,40,.2)', padding: '0.8rem', borderRadius: '4px', border: '1px solid rgba(50,180,80,.4)' }}>
+            ✓ Message transmitted! We will review your query shortly.
+          </div>
+        )}
+        {status === 'error' && (
+          <div style={{ marginTop: '1rem', color: '#ff6b6b', fontSize: '0.86rem', textAlign: 'center', background: 'rgba(100,26,26,.2)', padding: '0.8rem', borderRadius: '4px', border: '1px solid rgba(180,50,50,.4)' }}>
+            ✗ Transmission failure. Core system offline. Please try again.
+          </div>
+        )}
       </motion.form>
     </div>
   );
