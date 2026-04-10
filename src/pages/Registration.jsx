@@ -198,7 +198,27 @@ const Registration = () => {
 
               <div className="notice-box">
                 <span className="nb-t">Important Notes</span>
-                ✦ Registration closes May 5, 2026<br/>
+                <div style={{ 
+                  color: 'var(--gold)', 
+                  fontWeight: 600, 
+                  marginBottom: '0.8rem', 
+                  paddingBottom: '0.5rem', 
+                  borderBottom: '1px solid rgba(255,255,255,0.1)' 
+                }}>
+                  Registration is strictly open from now until May 5th.
+                </div>
+                <div style={{ 
+                  background: 'rgba(200, 50, 50, 0.15)', 
+                  borderLeft: '3px solid #ff4b4b', 
+                  padding: '0.6rem 0.8rem', 
+                  borderRadius: '0 4px 4px 0', 
+                  marginBottom: '1rem', 
+                  lineHeight: '1.5',
+                  color: '#f0e6e6',
+                  fontSize: '0.85rem'
+                }}>
+                  <strong style={{ color: '#ff6b6b' }}>Attention:</strong> All events are scheduled to run concurrently. To ensure a smooth experience, each cadet may register and participate in <strong>only one event</strong>.
+                </div>
                 ✦ Fee non-refundable after submission<br/>
                 ✦ Carry college ID on event day<br/>
                 ✦ Confirmation email within 24 hours<br/>

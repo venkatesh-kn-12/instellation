@@ -62,9 +62,10 @@
 }
 
 .dt-sub {
-  color: var(--gold);
-  font-size: 1rem;
+  color: #ffebb8;
+  font-size: 1.15rem;
   font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
 .dt-stats {
@@ -136,10 +137,11 @@
 }
 
 .dt-p {
-  font-size: 0.88rem;
-  color: var(--dim);
-  line-height: 1.95;
-  font-weight: 300;
+  font-size: 1.05rem;
+  color: #ffffff;
+  line-height: 1.6;
+  font-weight: 200;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 
 .rules-ul {
@@ -150,11 +152,13 @@
 }
 
 .rules-ul li {
-  font-size: 0.85rem;
-  color: var(--dim);
-  padding: 0.55rem 0.9rem 0.55rem 1.3rem;
+  font-size: 0.95rem;
+  color: #ffffff;
+  padding: 0.6rem 1rem 0.6rem 1.4rem;
   position: relative;
-  line-height: 1.6;
+  line-height: 1.7;
+  font-weight: 200;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
   background: rgba(201,168,76,.03);
   border-radius: 4px;
   border-left: 2px solid rgba(201,168,76,.2);
@@ -188,15 +192,16 @@
 }
 
 .cc-n {
-  font-weight: 600;
-  font-size: 0.88rem;
+  font-weight: 700;
+  font-size: 1.05rem;
   color: var(--white);
   margin-bottom: 0.3rem;
 }
 
 .cc-p {
-  font-size: 0.78rem;
-  color: var(--gold);
+  font-size: 0.95rem;
+  color: #ffebb8;
+  font-weight: 600;
 }
 
 .back-btn {

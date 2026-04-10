@@ -115,17 +115,32 @@ const Hero = () => {
               }}>
                 Dayananda Sagar Academy of Technology & Management
               </h2>
-              <div className="banner-subtitle" style={{ gap: 'clamp(0.4rem, 2vw, 1.5rem)', flexWrap: 'nowrap' }}>
+              <div className="banner-subtitle" style={{ gap: 'clamp(0.4rem, 2vw, 1.5rem)', flexWrap: 'nowrap', alignItems: 'center' }}>
                 <div className="banner-subtitle-line" style={{ width: 'clamp(10px, 5vw, 50px)', background: 'linear-gradient(90deg, transparent, var(--gold))' }}></div>
-                <span style={{ 
-                  color: '#fff', 
-                  fontWeight: '500', 
-                  textShadow: '0 0 10px rgba(255,255,255,0.4)', 
-                  fontSize: 'clamp(0.5rem, 1.5vw, 1rem)',
-                  whiteSpace: 'nowrap'
-                }}>
-                  Dept of MCA · Xccurate Club
-                </span>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1.4' }}>
+                  <span style={{ 
+                    color: '#fff', 
+                    fontWeight: '700', 
+                    textShadow: '0 0 15px rgba(255,255,255,0.6)', 
+                    fontSize: 'clamp(0.7rem, 2vw, 1.3rem)',
+                    whiteSpace: 'nowrap',
+                    letterSpacing: '0.5px'
+                  }}>
+                    Department of Master of Computer Application
+                  </span>
+                  <span style={{ 
+                    color: 'var(--gold)', 
+                    fontWeight: '600', 
+                    fontSize: 'clamp(0.6rem, 1.6vw, 1.1rem)',
+                    whiteSpace: 'nowrap',
+                    letterSpacing: '3px',
+                    textTransform: 'uppercase',
+                    marginTop: '4px',
+                    textShadow: '0 0 12px rgba(201,168,76,0.5)'
+                  }}>
+                    Xccurate Club
+                  </span>
+                </div>
                 <div className="banner-subtitle-line" style={{ width: 'clamp(10px, 5vw, 50px)', background: 'linear-gradient(270deg, transparent, var(--gold))' }}></div>
               </div>
             </div>

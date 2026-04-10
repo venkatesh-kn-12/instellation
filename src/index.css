@@ -8,10 +8,10 @@
   --gold-l: #f0c96d;
   --gold-glow: rgba(201, 168, 76, 0.35);
   --white: #e8eaf0;
-  --dim: #6a7d96;
-  --dim2: #4a5f78;
+  --dim: #e2e8f0;
+  --dim2: #cbd5e1;
   --card-glass: rgba(7, 18, 40, 0.6);
-  --border: rgba(201, 168, 76, 0.15);
+  --border: rgba(201, 168, 76, 0.25);
   --border2: rgba(201, 168, 76, 0.3);
   --ease: cubic-bezier(0.23, 1, 0.32, 1);
 
