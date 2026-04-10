@@ -28,7 +28,7 @@ app.post('/api/register', async (req, res) => {
     return res.status(400).json({ error: 'Name and email are required.' });
   }
 
-  const websiteLink = 'https://instellation-2026.vercel.app'; 
+  const websiteLink = 'https://instellation.vercel.app/'; 
   const brochureLink = 'https://bit.ly/instellation-2026-brochure'; 
   const eventDisplayName = eventName || (events && events.length > 0 ? events.join(', ') : 'Your Event');
 
