@@ -1,0 +1,308 @@
+.reg-wrap {
+  background: rgba(7,18,40,0.52);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.5rem;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 64px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.reg-wrap::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, rgba(201,168,76,0.03), transparent 55%);
+  pointer-events: none;
+  animation: regGlow 7s ease-in-out infinite;
+}
+
+@keyframes regGlow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+
+.reg-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.field {
+  margin-bottom: 1.3rem;
+}
+
+.field label {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.59rem;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.55rem;
+  transition: color 0.3s;
+}
+
+.field:focus-within label {
+  color: var(--gold-l);
+}
+
+.field input, .field select, .field textarea {
+  width: 100%;
+  background: rgba(2,4,8,0.65);
+  border: 1px solid rgba(201,168,76,0.18);
+  color: var(--white);
+  padding: 0.78rem 1.1rem;
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+  -webkit-appearance: none;
+  appearance: none;
+  backdrop-filter: blur(4px);
+}
+
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--gold);
+  background: rgba(7,18,40,0.85);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.08), 0 0 20px rgba(201,168,76,0.05);
+}
+
+.field input::placeholder, .field textarea::placeholder {
+  color: rgba(106,125,150,0.45);
+}
+
+.field select option {
+  background: #071220;
+  color: var(--white);
+}
+
+.sub-btn {
+  width: 100%;
+  padding: 1rem;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, rgba(201,168,76,0.28), rgba(201,168,76,0.14));
+  border: 1px solid rgba(201,168,76,0.5);
+  color: var(--gold-l);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s var(--ease);
+  backdrop-filter: blur(8px);
+}
+
+.sub-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.sub-btn:hover:not(:disabled) {
+  background: rgba(201,168,76,0.38);
+  border-color: var(--gold);
+  box-shadow: 0 0 40px rgba(201,168,76,0.3), 0 8px 32px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
+}
+
+.sub-btn:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.sub-btn:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+
+.sub-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.qr-panel {
+  background: rgba(7,18,40,0.7);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.8rem;
+  text-align: center;
+  backdrop-filter: blur(12px);
+}
+
+.qr-t {
+  font-family: var(--font-heading);
+  font-size: 0.6rem;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  display: block;
+}
+
+.qr-wrap {
+  position: relative;
+  width: 130px;
+  margin: 0 auto 1rem;
+}
+
+.qr-img {
+  width: 130px;
+  height: 130px;
+  border: 2px solid rgba(201,168,76,0.25);
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 2px;
+  padding: 8px;
+  background: rgba(2,4,8,0.85);
+  animation: qrGlow 3.5s ease-in-out infinite;
+}
+
+@keyframes qrGlow {
+  0%, 100% { box-shadow: 0 0 0 rgba(201,168,76,0); }
+  50% { box-shadow: 0 0 28px rgba(201,168,76,0.28); }
+}
+
+.qrc { border-radius: 1.5px; }
+.qrc.b { background: var(--gold); opacity: 0.85; }
+.qrc.w { background: transparent; }
+
+.qr-c {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-color: var(--gold);
+  border-style: solid;
+  border-width: 2px;
+  animation: qrcGlow 2s ease-in-out infinite;
+}
+
+.qr-c.tl { top: 0; left: 0; border-right: none; border-bottom: none; border-radius: 4px 0 0 0; }
+.qr-c.tr { top: 0; right: 0; border-left: none; border-bottom: none; border-radius: 0 4px 0 0; }
+.qr-c.bl { bottom: 0; left: 0; border-right: none; border-top: none; border-radius: 0 0 0 4px; }
+.qr-c.br { bottom: 0; right: 0; border-left: none; border-top: none; border-radius: 0 0 4px 0; }
+
+@keyframes qrcGlow {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+.upi-box {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(201,168,76,0.06);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 6px;
+}
+
+.upi-l {
+  font-family: var(--font-heading);
+  font-size: 0.55rem;
+  color: var(--dim);
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.upi-id {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  color: var(--gold-l);
+  font-weight: 700;
+}
+
+.pay-note {
+  font-size: 0.76rem;
+  color: var(--dim);
+  line-height: 1.7;
+  margin-top: 0.9rem;
+}
+
+.notice-box {
+  background: rgba(7,18,40,0.6);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.2rem;
+  font-size: 0.76rem;
+  color: var(--dim);
+  line-height: 2;
+  margin-top: 1.2rem;
+  backdrop-filter: blur(8px);
+}
+
+.nb-t {
+  font-family: var(--font-heading);
+  font-size: 0.56rem;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+@media(max-width: 900px) {
+  .reg-wrap {
+    padding: 1.5rem;
+  }
+  .reg-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .form-row { grid-template-columns: 1fr; }
+}
+
+@media(max-width: 600px) {
+  .reg-wrap {
+    padding: 1.2rem;
+    border-radius: 12px;
+  }
+
+  .field label {
+    font-size: 0.55rem;
+    letter-spacing: 1.5px;
+  }
+
+  .field input, .field select, .field textarea {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.8rem;
+  }
+
+  .qr-panel {
+    padding: 1.2rem;
+  }
+
+  .qr-wrap {
+    width: 110px;
+  }
+
+  .qr-img {
+    width: 110px;
+    height: 110px;
+    padding: 6px;
+  }
+
+  .upi-id {
+    font-size: 0.75rem;
+  }
+
+  .notice-box {
+    padding: 1rem;
+    font-size: 0.7rem;
+    line-height: 1.8;
+  }
+}

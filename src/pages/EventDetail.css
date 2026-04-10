@@ -1,0 +1,221 @@
+.dt-hero {
+  padding: 4rem 2rem 4rem;
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 0%, rgba(37,99,212,.07), transparent 58%);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+.dt-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.3;
+}
+
+.dt-planet {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
+  position: relative;
+  animation: dtFloat 4s ease-in-out infinite;
+  background-size: cover;
+  background-position: center;
+}
+
+@keyframes dtFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+
+.dt-ring {
+  position: absolute;
+  width: 170px;
+  height: 40px;
+  border: 2px solid rgba(201,168,76,.35);
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotateX(74deg);
+  animation: satSpin 6s linear infinite;
+}
+
+.dt-lbl {
+  font-family: var(--font-heading);
+  font-size: 0.6rem;
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.7rem;
+}
+
+.dt-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+
+.dt-sub {
+  color: var(--gold);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.dt-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  gap: 1rem;
+  margin: 2.5rem 0;
+}
+
+.dt-stat {
+  background: var(--card-glass);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.3rem;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s var(--ease);
+}
+
+.dt-stat:hover {
+  border-color: var(--border2);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+
+.dts-l {
+  font-family: var(--font-heading);
+  font-size: 0.58rem;
+  color: var(--dim2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.dts-v {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.dt-sec {
+  margin: 2.2rem 0;
+}
+
+.dt-sec h3 {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.dt-sec h3::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--gold-glow);
+}
+
+.dt-p {
+  font-size: 0.88rem;
+  color: var(--dim);
+  line-height: 1.95;
+  font-weight: 300;
+}
+
+.rules-ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.rules-ul li {
+  font-size: 0.85rem;
+  color: var(--dim);
+  padding: 0.55rem 0.9rem 0.55rem 1.3rem;
+  position: relative;
+  line-height: 1.6;
+  background: rgba(201,168,76,.03);
+  border-radius: 4px;
+  border-left: 2px solid rgba(201,168,76,.2);
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.rules-ul li:hover {
+  border-left-color: var(--gold);
+  background: rgba(201,168,76,.06);
+}
+
+.coord-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.coord-card {
+  background: var(--card-glass);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.1rem 1.4rem;
+  min-width: 180px;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s;
+}
+
+.coord-card:hover {
+  border-color: var(--border2);
+  transform: translateY(-2px);
+}
+
+.cc-n {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--white);
+  margin-bottom: 0.3rem;
+}
+
+.cc-p {
+  font-size: 0.78rem;
+  color: var(--gold);
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  color: var(--dim);
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 0;
+  transition: color 0.3s;
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+.back-btn:hover {
+  color: var(--gold);
+}

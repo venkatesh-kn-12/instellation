@@ -1,0 +1,283 @@
+.wavy-roadmap-page {
+  min-height: 100vh;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+  padding-bottom: 80px; /* Reduced to eliminate void space */
+}
+
+.roadmap-title {
+  text-align: center;
+  font-size: 3rem;
+  letter-spacing: 12px;
+  color: #fff;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  z-index: 10;
+}
+
+/* Hardcoded to 800px width so the SVG path pixels and DOM nodes stay perfectly synchronized.
+   The .wavy-scaler handles fitting this into smaller screens. */
+.wavy-scaler {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  overflow: visible;
+}
+
+.wavy-canvas {
+  position: relative;
+  width: 800px !important;
+  height: 3000px;
+  margin: 0 auto 10rem auto;
+  transform-origin: top center;
+  flex-shrink: 0;
+}
+
+.wavy-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ==================================
+   THE PHYSICS ROCKET
+=================================== */
+.physics-rocket {
+  position: absolute;
+  z-index: 50;
+  /* offset-path and offset-distance are fed directly via inline style */
+  offset-rotate: auto 90deg; /* Correct tangent alignment so it points "forward" */
+  transition: offset-distance 0.1s ease-out; /* Smooth scrubbing buffer */
+}
+
+.rocket-icon {
+  color: #fff;
+  transform: rotate(-45deg); /* Fix lucide icon default to point straight up */
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+}
+
+.rocket-fire-trail {
+  position: absolute;
+  top: 100%; /* Spits out the bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 15px;
+  height: 100px;
+  background: linear-gradient(to bottom, rgba(255, 204, 0, 1), transparent);
+  border-radius: 5px;
+  filter: blur(4px);
+  animation: flicker 0.1s infinite alternate;
+}
+
+@keyframes flicker {
+  0% { height: 80px; opacity: 0.8; }
+  100% { height: 120px; opacity: 1; }
+}
+
+
+/* ==================================
+   PLANET NODES & FLARES
+=================================== */
+.wavy-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wavy-planet {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #003366, #050000);
+  box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.9), 0 0 10px rgba(255, 204, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+
+.planet-ring {
+  position: absolute;
+  width: 140%;
+  height: 20%;
+  top: 40%;
+  left: -20%;
+  border: 1px dotted rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: rotate(15deg);
+  transition: all 0.4s ease;
+}
+
+/* THE MAGIC FLARE WHEN ROCKET IS NEAR */
+.wavy-node.active-flare .wavy-planet {
+  box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.9), 0 0 40px rgba(255, 204, 0, 1);
+  transform: scale(1.3);
+}
+
+.wavy-node.active-flare .planet-ring {
+  border-color: #ffcc00;
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+  transform: rotate(70deg) scale(1.1); /* Spin it up! */
+}
+
+/* ==================================
+   FLOATING TEXT BOXES
+=================================== */
+.wavy-content {
+  position: absolute;
+  width: 500px;
+  display: flex;
+  align-items: center;
+}
+
+.wavy-content.left-dock {
+  right: 60px; /* Shift to left side */
+  flex-direction: row-reverse;
+}
+
+.wavy-content.right-dock {
+  left: 60px; /* Shift to right side */
+}
+
+.wavy-content.center-dock {
+  top: 60px; /* Shift downwards */
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: column;
+}
+
+.wavy-branch {
+  width: 40px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+  transition: background 0.4s ease;
+}
+
+.wavy-content.center-dock .wavy-branch {
+  width: 1px;
+  height: 40px;
+}
+
+.wavy-text-box {
+  background: rgba(10, 0, 0, 0.7);
+  border: 1px solid rgba(255, 204, 0, 0.2);
+  padding: 1.5rem;
+  transition: all 0.4s ease;
+}
+
+.left-dock .wavy-text-box { border-right: 2px solid #ffcc00; text-align: right; }
+.right-dock .wavy-text-box { border-left: 2px solid #ffcc00; text-align: left; }
+.center-dock .wavy-text-box { border-top: 2px solid #ffcc00; text-align: center; }
+
+/* The Flare effect carries over to the text! */
+.wavy-node.active-flare .wavy-branch {
+  background: #ffcc00;
+  box-shadow: 0 0 10px #ffcc00;
+}
+
+.wavy-node.active-flare .wavy-text-box {
+  border-color: #ffcc00;
+  background: rgba(255, 204, 0, 0.1);
+  transform: scale(1.05);
+}
+
+.info-time {
+  display: block;
+  color: #00f0ff;
+  font-family: monospace;
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  margin-bottom: 0.5rem;
+}
+
+.info-title {
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+.info-desc {
+  color: #aaa;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+
+/* ==================================
+   RESPONSIVENESS (Scaling Logic)
+=================================== */
+@media (max-width: 850px) {
+  .wavy-scaler {
+    --timeline-scale: calc(100vw / 420);
+    height: calc(var(--timeline-height, 3500px) * min(var(--timeline-scale), 1));
+    overflow: hidden;
+    align-items: flex-start;
+  }
+
+  .wavy-canvas {
+    width: 400px !important;
+    transform: scale(min(var(--timeline-scale), 1));
+    transform-origin: top center;
+    margin: 0;
+  }
+
+  .wavy-content {
+    width: 250px;
+  }
+  .wavy-content.left-dock {
+    right: 40px;
+  }
+  .wavy-content.right-dock {
+    left: 40px;
+  }
+  .wavy-text-box {
+    padding: 1rem;
+    min-width: unset;
+    width: 100%;
+  }
+  .info-title {
+    font-size: 1.1rem;
+  }
+  .info-time {
+    font-size: 1.1rem;
+  }
+  .info-desc {
+    font-size: 0.8rem;
+  }
+  
+  .roadmap-title {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+    letter-spacing: 6px;
+    padding: 0 1rem;
+    margin-bottom: 3rem;
+  }
+}
+
+/* Ensure cards are legible when scaled down */
+.wavy-text-box {
+  background: rgba(8, 2, 2, 0.85);
+  border: 1px solid rgba(255, 204, 0, 0.3);
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.info-title {
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}

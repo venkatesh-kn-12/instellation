@@ -1,0 +1,54 @@
+body, body * {
+  cursor: none !important;
+}
+
+.custom-cursor-container {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cursor-planet {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 30% 30%, #ffcc00, #b28e00);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
+  z-index: 10001;
+}
+
+.cursor-orbit {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 1px dotted rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  animation: orbit-spin 3s linear infinite;
+}
+
+.cursor-moon {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #ffffff;
+}
+
+@keyframes orbit-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

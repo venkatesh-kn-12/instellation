@@ -1,0 +1,173 @@
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--black);
+  z-index: 99990;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  transition: opacity 1s, visibility 1s;
+}
+
+#loader.fading {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.ld-scene {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ld-planet {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #2563d4, #0a1a40 55%, #020408 85%);
+  box-shadow: 0 0 60px rgba(37,99,212,.7), inset -12px -12px 24px rgba(0,0,0,.7);
+  animation: ldPulse 2s ease-in-out infinite;
+}
+
+@keyframes ldPulse {
+  0%, 100% { box-shadow: 0 0 50px rgba(37,99,212,.6); }
+  50% { box-shadow: 0 0 90px rgba(37,99,212,.9); }
+}
+
+.ld-ring-wrap {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateX(74deg);
+  z-index: 1; /* Keep it below or above? */
+}
+
+.ld-ring {
+  width: 100%;
+  height: 100%;
+  border: 2px dashed rgba(201,168,76,.4);
+  border-radius: 50%;
+  box-shadow: inset 0 0 15px rgba(201,168,76,.1);
+  animation: ldRingRot 6s linear infinite;
+}
+
+@keyframes ldRingRot {
+  to { transform: rotateZ(360deg); }
+}
+
+.ld-moon-orbit-x {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  animation: orbX 1.5s cubic-bezier(0.36, 0, 0.64, 1) infinite alternate;
+  z-index: 5;
+}
+
+.ld-moon-orbit-y {
+  position: absolute;
+  animation: orbY 1.5s cubic-bezier(0.36, 0, 0.64, 1) infinite alternate;
+  animation-delay: -0.75s; /* 90deg phase shift */
+}
+
+@keyframes orbX {
+  0% { transform: translateX(-70px); }
+  100% { transform: translateX(70px); }
+}
+
+@keyframes orbY {
+  0% { transform: translateY(-19px); z-index: 2; }
+  100% { transform: translateY(19px); z-index: 20; }
+}
+
+.ld-moon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 18px var(--gold-glow);
+  transform: translate(-50%, -50%);
+}
+
+.ld-logo {
+  display: flex;
+}
+
+.ld-char {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--gold);
+  opacity: 0;
+  transform: translateY(16px);
+  animation: ldChar .08s var(--ease) forwards;
+}
+
+@keyframes ldChar {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ld-progress {
+  width: 200px;
+  height: 1px;
+  background: rgba(201,168,76,.12);
+  border-radius: 1px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ld-bar {
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--gold-l));
+  width: 0%;
+  transition: width .05s linear;
+}
+
+.ld-status {
+  font-family: var(--font-heading);
+  font-size: 0.58rem;
+  color: var(--dim);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .ld-scene {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .ld-planet {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .ld-ring-wrap {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .ld-moon-orbit-x {
+    animation: orbX-m 1.5s cubic-bezier(0.36, 0, 0.64, 1) infinite alternate;
+  }
+  
+  @keyframes orbX-m {
+    0% { transform: translateX(-50px); }
+    100% { transform: translateX(50px); }
+  }
+
+  .ld-char {
+    font-size: 1.2rem;
+  }
+  
+  .ld-progress {
+    width: 160px;
+  }
+}

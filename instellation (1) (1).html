@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Instellation 2025 — MCA Tech Fest | DSATM</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#020408;--deep:#050c18;--navy:#071220;
+  --gold:#c9a84c;--gold-l:#f0c96d;--gold-d:rgba(201,168,76,0.12);
+  --gold-glow:rgba(201,168,76,0.35);
+  --white:#e8eaf0;--dim:#6a7d96;--dim2:#4a5f78;
+  --card-glass:rgba(7,18,40,0.6);
+  --border:rgba(201,168,76,0.15);--border2:rgba(201,168,76,0.3);
+  --ease:cubic-bezier(0.23,1,0.32,1);
+}
+html{font-size:16px;scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--black);color:var(--white);font-family:'Poppins',sans-serif;overflow-x:hidden;min-height:100vh;cursor:none}
+
+/* CURSOR */
+#cur{position:fixed;width:8px;height:8px;background:var(--gold-l);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .2s,height .2s;will-change:transform;mix-blend-mode:screen}
+#cur-ring{position:fixed;width:32px;height:32px;border:1.5px solid rgba(201,168,76,0.45);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);will-change:transform;transition:width .3s,height .3s,border-color .3s}
+
+/* GALAXY */
+#galaxy{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* PAGE VEIL */
+#veil{position:fixed;inset:0;z-index:9000;pointer-events:none;background:linear-gradient(135deg,var(--navy),var(--black));opacity:0;transition:opacity .5s ease}
+#veil.in{opacity:1;pointer-events:all}
+
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--black);z-index:99990;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;transition:opacity 1s,visibility 1s}
+#loader.gone{opacity:0;visibility:hidden;pointer-events:none}
+.ld-scene{position:relative;width:150px;height:150px;display:flex;align-items:center;justify-content:center}
+.ld-planet{width:72px;height:72px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#2563d4,#0a1a40 55%,#020408 85%);box-shadow:0 0 60px rgba(37,99,212,.7),inset -12px -12px 24px rgba(0,0,0,.7);animation:ldPulse 2s ease-in-out infinite}
+@keyframes ldPulse{0%,100%{box-shadow:0 0 50px rgba(37,99,212,.6)}50%{box-shadow:0 0 90px rgba(37,99,212,.9)}}
+.ld-ring-wrap{position:absolute;width:130px;height:30px;top:50%;left:50%;transform:translate(-50%,-50%) rotateX(74deg);animation:ldRing 2.5s linear infinite}
+@keyframes ldRing{to{transform:translate(-50%,-50%) rotateX(74deg) rotateZ(360deg)}}
+.ld-ring{width:100%;height:100%;border:2.5px solid rgba(201,168,76,.5);border-radius:50%;box-shadow:0 0 15px var(--gold-glow)}
+.ld-orbit{position:absolute;width:110px;height:110px;top:50%;left:50%;transform:translate(-50%,-50%);animation:ldOrb 2s linear infinite}
+@keyframes ldOrb{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.ld-moon{position:absolute;top:-5px;left:50%;width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold-glow);transform:translateX(-50%)}
+.ld-logo{display:flex}
+.ld-char{font-family:'Orbitron',monospace;font-size:1.5rem;font-weight:900;color:var(--gold);opacity:0;transform:translateY(16px);animation:ldChar .08s var(--ease) forwards}
+@keyframes ldChar{to{opacity:1;transform:translateY(0)}}
+.ld-progress{width:200px;height:1px;background:rgba(201,168,76,.12);border-radius:1px;overflow:hidden;position:relative}
+.ld-bar{height:100%;background:linear-gradient(90deg,transparent,var(--gold),var(--gold-l));width:0%;transition:width .05s linear}
+.ld-status{font-family:'Orbitron',monospace;font-size:.58rem;color:var(--dim);letter-spacing:3px;text-transform:uppercase}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2.5rem;transition:background .4s,padding .3s,border-color .3s}
+nav.scrolled{background:rgba(2,4,8,.92);border-bottom:1px solid var(--border);backdrop-filter:blur(20px);padding:.7rem 2.5rem}
+.nav-logo{font-family:'Orbitron',monospace;font-size:1rem;font-weight:900;letter-spacing:4px;cursor:pointer;user-select:none;background:linear-gradient(90deg,var(--gold-l),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links a{font-size:.64rem;color:var(--dim);text-decoration:none;letter-spacing:2px;font-family:'Orbitron',monospace;font-weight:500;text-transform:uppercase;cursor:pointer;transition:color .25s;position:relative;padding-bottom:3px}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .3s var(--ease)}
+.nav-links a:hover,.nav-links a.active{color:var(--gold-l)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-cta{font-family:'Orbitron',monospace;font-size:.62rem;padding:.48rem 1.2rem;border:1px solid var(--gold);color:var(--gold);background:rgba(201,168,76,.08);cursor:pointer;letter-spacing:2px;text-transform:uppercase;border-radius:3px;transition:all .3s var(--ease);backdrop-filter:blur(8px)}
+.nav-cta:hover{background:var(--gold);color:var(--black);box-shadow:0 0 30px var(--gold-glow);transform:translateY(-1px)}
+.nav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.3rem}
+.nav-ham span{display:block;width:22px;height:1.5px;background:var(--gold);border-radius:2px;transition:.3s}
+.m-menu{position:fixed;top:0;left:0;right:0;bottom:0;z-index:490;background:rgba(2,4,8,.97);backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.2rem;opacity:0;pointer-events:none;transition:opacity .4s}
+.m-menu.open{opacity:1;pointer-events:all}
+.m-menu a{font-family:'Orbitron',monospace;font-size:1.1rem;color:var(--dim);letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:color .3s}
+.m-menu a:hover{color:var(--gold)}
+.m-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;cursor:pointer;color:var(--dim);font-size:1.4rem;transition:color .3s}
+.m-close:hover{color:var(--gold)}
+
+/* PAGE */
+.page{position:relative;z-index:1;min-height:100vh;animation:pgIn .5s var(--ease) both}
+@keyframes pgIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 5rem;overflow:hidden;position:relative}
+.hero-glow{position:absolute;border-radius:50%;pointer-events:none;filter:blur(80px)}
+.hero-glow-1{width:60vw;height:60vw;top:-20%;left:-15%;background:radial-gradient(circle,rgba(30,75,180,.1),transparent 70%);animation:ambientFloat 9s ease-in-out infinite}
+.hero-glow-2{width:50vw;height:50vw;bottom:-20%;right:-10%;background:radial-gradient(circle,rgba(201,168,76,.06),transparent 70%);animation:ambientFloat 12s ease-in-out infinite reverse}
+@keyframes ambientFloat{0%,100%{transform:scale(1) translate(0,0)}50%{transform:scale(1.08) translate(2%,3%)}}
+.planet-sys{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.fp{position:absolute;border-radius:50%;animation:fpFloat var(--dur,9s) ease-in-out infinite;animation-delay:var(--del,0s)}
+@keyframes fpFloat{0%,100%{transform:translateY(0) rotateY(0deg)}33%{transform:translateY(-20px) rotateY(12deg)}66%{transform:translateY(8px) rotateY(-8deg)}}
+.hero-eyebrow{font-family:'Orbitron',monospace;font-size:.68rem;letter-spacing:6px;color:var(--gold);text-transform:uppercase;margin-bottom:1.5rem;position:relative;z-index:2;opacity:0;animation:eyeIn .9s .35s var(--ease) forwards}
+@keyframes eyeIn{from{opacity:0;letter-spacing:12px}to{opacity:1;letter-spacing:6px}}
+.hero-title{font-family:'Orbitron',monospace;font-size:clamp(3.5rem,10vw,8.5rem);font-weight:900;line-height:.9;letter-spacing:.02em;display:flex;justify-content:center;flex-wrap:wrap;position:relative;z-index:2;margin-bottom:1.2rem;perspective:600px}
+.tc{display:inline-block;background:linear-gradient(145deg,var(--white) 0%,var(--gold-l) 50%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0;transform:translateY(55px) rotateX(-80deg);transform-origin:center bottom;animation:tcIn .65s var(--ease) forwards;animation-delay:var(--cd,0s);transition:filter .3s}
+.tc:hover{filter:drop-shadow(0 0 25px rgba(201,168,76,.8));cursor:default}
+@keyframes tcIn{to{opacity:1;transform:translateY(0) rotateX(0)}}
+.title-shimmer{position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(201,168,76,.18) 50%,transparent 100%);background-size:200% 100%;animation:shimmerMove 4s 2.2s ease-in-out infinite;pointer-events:none}
+@keyframes shimmerMove{0%,100%{background-position:200% 0}50%{background-position:-200% 0}}
+.hero-tagline{font-size:clamp(.85rem,2vw,1.05rem);color:var(--dim);font-weight:300;letter-spacing:3px;position:relative;z-index:2;opacity:0;animation:fadeUp .8s 1.2s var(--ease) forwards}
+.hero-meta{display:flex;gap:2.5rem;margin:2rem 0 1.5rem;flex-wrap:wrap;justify-content:center;position:relative;z-index:2;opacity:0;animation:fadeUp .8s 1.4s var(--ease) forwards}
+.hm-item .hm-l{font-size:.58rem;color:var(--gold);letter-spacing:3px;font-family:'Orbitron',monospace;text-transform:uppercase;margin-bottom:.3rem}
+.hm-item .hm-v{font-size:.9rem;color:var(--white);font-weight:500}
+.countdown{display:flex;align-items:center;gap:.8rem;margin:1.2rem 0;flex-wrap:wrap;justify-content:center;position:relative;z-index:2;opacity:0;animation:fadeUp .8s 1.5s var(--ease) forwards}
+.cd-box{min-width:76px;padding:1rem 1.1rem;text-align:center;background:rgba(7,18,40,.55);border:1px solid var(--border);border-radius:6px;backdrop-filter:blur(16px);position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.05);transition:border-color .3s,box-shadow .3s}
+.cd-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.6),transparent)}
+.cd-box:hover{border-color:var(--border2);box-shadow:0 8px 32px rgba(0,0,0,.4),0 0 25px var(--gold-glow),inset 0 1px 0 rgba(255,255,255,.05)}
+.cd-num{font-family:'Orbitron',monospace;font-size:2rem;font-weight:700;color:var(--gold-l);line-height:1;display:block;text-shadow:0 0 30px rgba(201,168,76,.5)}
+.cd-lbl{font-size:.56rem;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-top:.3rem;display:block}
+.cd-sep{font-family:'Orbitron',monospace;font-size:2rem;color:var(--gold);opacity:.4;align-self:flex-end;padding-bottom:.7rem;animation:sepBlink 2s ease-in-out infinite}
+@keyframes sepBlink{0%,100%{opacity:.4}50%{opacity:.85}}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1.2rem;position:relative;z-index:2;opacity:0;animation:fadeUp .8s 1.7s var(--ease) forwards}
+
+/* GLASSMORPHISM BUTTONS */
+.btn-g{font-family:'Orbitron',monospace;font-size:.68rem;padding:.85rem 2.2rem;letter-spacing:2px;text-transform:uppercase;border-radius:4px;cursor:pointer;position:relative;overflow:hidden;transition:all .4s var(--ease);backdrop-filter:blur(12px)}
+.btn-g::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.12) 0%,rgba(255,255,255,0) 50%,rgba(255,255,255,.04) 100%);pointer-events:none}
+.btn-g::after{content:'';position:absolute;top:-50%;left:-60%;width:50%;height:200%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transform:skewX(-20deg);transition:left .5s var(--ease)}
+.btn-g:hover::after{left:120%}
+.btn-p{background:rgba(201,168,76,.22);border:1px solid rgba(201,168,76,.6);color:var(--gold-l);font-weight:700}
+.btn-p:hover{background:rgba(201,168,76,.38);box-shadow:0 0 40px rgba(201,168,76,.4),0 8px 32px rgba(0,0,0,.3);transform:translateY(-3px);border-color:var(--gold-l)}
+.btn-o{background:rgba(7,18,40,.45);border:1px solid rgba(201,168,76,.28);color:var(--dim)}
+.btn-o:hover{background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.5);color:var(--white);transform:translateY(-3px)}
+.btn-ghost{background:transparent;border:1px solid rgba(122,138,160,.22);color:var(--dim2);font-size:.62rem;padding:.6rem 1.4rem}
+.btn-ghost:hover{border-color:var(--border2);color:var(--dim);background:rgba(201,168,76,.04)}
+
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;z-index:2;opacity:0;animation:fadeIn 1s 2.6s forwards}
+.scroll-hint span{font-family:'Orbitron',monospace;font-size:.54rem;color:var(--dim2);letter-spacing:3px;text-transform:uppercase}
+.scroll-mouse{width:22px;height:34px;border:1px solid rgba(122,138,160,.3);border-radius:12px;display:flex;justify-content:center;padding-top:5px}
+.scroll-wheel{width:2px;height:8px;background:var(--gold);border-radius:2px;animation:sw 2s ease-in-out infinite}
+@keyframes sw{0%,100%{opacity:1;transform:translateY(0)}50%{opacity:0;transform:translateY(10px)}}
+@keyframes fadeIn{to{opacity:1}}
+
+/* PARALLAX BAND */
+.para-band{height:180px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(180deg,transparent,rgba(37,99,212,.04),transparent);position:relative}
+.para-text{font-family:'Orbitron',monospace;font-size:clamp(4rem,10vw,9rem);font-weight:900;color:rgba(201,168,76,.04);letter-spacing:8px;white-space:nowrap;animation:ptScroll 22s linear infinite}
+@keyframes ptScroll{from{transform:translateX(15%)}to{transform:translateX(-15%)}}
+
+/* SECTIONS */
+.section{padding:6rem 2.5rem;max-width:1200px;margin:0 auto}
+.s-header{text-align:center;margin-bottom:4rem}
+.s-label{font-family:'Orbitron',monospace;font-size:.64rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:.8rem;display:block}
+.s-title{font-family:'Orbitron',monospace;font-size:clamp(1.9rem,4vw,3rem);font-weight:700;line-height:1.1;color:var(--white)}
+.s-title em{color:transparent;-webkit-text-stroke:1px var(--gold);font-style:normal}
+.s-desc{color:var(--dim);margin-top:.9rem;font-size:.9rem;line-height:1.85;font-weight:300;max-width:580px;margin-left:auto;margin-right:auto}
+.s-line{width:1px;height:55px;background:linear-gradient(180deg,var(--gold),transparent);margin:1.5rem auto 0}
+
+/* CLAY CARDS */
+.events-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:1.5rem}
+.clay{background:linear-gradient(145deg,rgba(10,25,55,.82),rgba(5,12,24,.96));border:1px solid var(--border);border-radius:16px;padding:2rem;cursor:pointer;transition:all .5s var(--ease);position:relative;overflow:hidden;box-shadow:0 4px 0 rgba(0,0,0,.5),0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.06)}
+.clay::before{content:'';position:absolute;inset:0;border-radius:16px;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.06),transparent 65%);opacity:0;transition:opacity .4s}
+.clay::after{content:'';position:absolute;top:-2px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent);border-radius:2px;opacity:0;transition:opacity .4s}
+.clay:hover{border-color:rgba(201,168,76,.38);transform:translateY(-10px) scale(1.01);box-shadow:0 0 0 rgba(0,0,0,0),0 32px 64px rgba(0,0,0,.65),0 0 50px rgba(201,168,76,.1),inset 0 1px 0 rgba(255,255,255,.09)}
+.clay:hover::before{opacity:1}
+.clay:hover::after{opacity:1}
+.cp-wrap{width:56px;height:56px;margin-bottom:1.2rem;position:relative;flex-shrink:0}
+.cp{width:52px;height:52px;border-radius:50%;position:relative;box-shadow:var(--cpg,0 0 25px rgba(37,99,212,.5));transition:box-shadow .4s,transform .4s;animation:cpSpin 10s ease-in-out infinite}
+.clay:hover .cp{box-shadow:var(--cpgh,0 0 50px rgba(37,99,212,.8));transform:scale(1.12) rotate(18deg);animation-play-state:paused}
+@keyframes cpSpin{0%,100%{filter:brightness(1)}50%{filter:brightness(1.25)}}
+.sat-ring{position:absolute;width:88px;height:20px;border:2px solid rgba(201,168,76,.35);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%) rotateX(75deg);animation:satSpin 5s linear infinite;box-shadow:0 0 10px rgba(201,168,76,.1)}
+@keyframes satSpin{to{transform:translate(-50%,-50%) rotateX(75deg) rotateZ(360deg)}}
+.earth-p{background:linear-gradient(170deg,rgba(30,144,255,.75) 0%,rgba(30,144,255,.35) 30%,transparent 50%),radial-gradient(circle at 40% 40%,#1e6419,#0a5028 40%,#083a1e 70%,#020f08 100%);animation:earthSpin 14s linear infinite!important}
+@keyframes earthSpin{0%{background:linear-gradient(170deg,rgba(30,144,255,.75) 0%,rgba(30,144,255,.35) 30%,transparent 50%),radial-gradient(circle at 20% 40%,#1e6419,#0a5028 40%,#083a1e 70%,#020f08 100%)}100%{background:linear-gradient(170deg,rgba(30,144,255,.75) 0%,rgba(30,144,255,.35) 30%,transparent 50%),radial-gradient(circle at 80% 40%,#1e6419,#0a5028 40%,#083a1e 70%,#020f08 100%)}}
+.mars-p{animation:marsPulse 2.5s ease-in-out infinite!important}
+@keyframes marsPulse{0%,100%{box-shadow:0 0 25px rgba(180,50,20,.5)}50%{box-shadow:0 0 55px rgba(220,80,30,.85)}}
+.e-plbl{font-family:'Orbitron',monospace;font-size:.58rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:.4rem;opacity:.8}
+.e-name{font-family:'Orbitron',monospace;font-size:.97rem;font-weight:700;color:var(--white);margin-bottom:.3rem;line-height:1.3}
+.e-sub{font-size:.76rem;color:var(--gold);margin-bottom:.7rem;font-weight:500}
+.e-desc{font-size:.8rem;color:var(--dim);line-height:1.7;font-weight:300}
+.e-footer{display:flex;gap:1.2rem;margin-top:1.2rem;padding-top:1rem;border-top:1px solid rgba(201,168,76,.08)}
+.efi .efi-l{font-size:.54rem;color:var(--dim2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.15rem}
+.efi .efi-v{font-size:.8rem;color:var(--white);font-weight:500}
+.efi:first-child .efi-v{color:var(--gold)}
+.e-cta{position:absolute;bottom:1.3rem;right:1.4rem;font-family:'Orbitron',monospace;font-size:.6rem;color:var(--gold);opacity:0;transform:translateX(-5px);transition:all .35s var(--ease);letter-spacing:1px}
+.clay:hover .e-cta{opacity:1;transform:translateX(0)}
+
+/* DETAIL */
+.dt-hero{padding:9rem 2rem 4rem;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(37,99,212,.07),transparent 58%);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.dt-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.3}
+.dt-planet{width:100px;height:100px;border-radius:50%;margin:0 auto 1.5rem;position:relative;animation:dtFloat 4s ease-in-out infinite}
+@keyframes dtFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+.dt-ring{position:absolute;width:170px;height:40px;border:2px solid rgba(201,168,76,.35);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%) rotateX(74deg);animation:satSpin 6s linear infinite}
+.dt-lbl{font-family:'Orbitron',monospace;font-size:.6rem;color:var(--gold);letter-spacing:4px;text-transform:uppercase;display:block;margin-bottom:.7rem}
+.dt-title{font-family:'Orbitron',monospace;font-size:clamp(2rem,5vw,4rem);font-weight:900;color:var(--white);margin-bottom:.4rem}
+.dt-sub{color:var(--gold);font-size:1rem;font-weight:500}
+.dt-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:1rem;margin:2.5rem 0}
+.dt-stat{background:var(--card-glass);border:1px solid var(--border);border-radius:8px;padding:1.3rem;text-align:center;backdrop-filter:blur(8px);transition:all .3s var(--ease)}
+.dt-stat:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.dts-l{font-family:'Orbitron',monospace;font-size:.58rem;color:var(--dim2);letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:.4rem}
+.dts-v{font-family:'Orbitron',monospace;font-size:1.05rem;font-weight:700;color:var(--gold)}
+.dt-sec{margin:2.2rem 0}
+.dt-sec h3{font-family:'Orbitron',monospace;font-size:.72rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:.9rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.8rem}
+.dt-sec h3::before{content:'';display:inline-block;width:5px;height:5px;background:var(--gold);border-radius:50%;box-shadow:0 0 8px var(--gold-glow)}
+.dt-p{font-size:.88rem;color:var(--dim);line-height:1.95;font-weight:300}
+.rules-ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.rules-ul li{font-size:.85rem;color:var(--dim);padding:.55rem .9rem .55rem 1.3rem;position:relative;line-height:1.6;background:rgba(201,168,76,.03);border-radius:4px;border-left:2px solid rgba(201,168,76,.2);transition:border-color .3s,background .3s}
+.rules-ul li:hover{border-left-color:var(--gold);background:rgba(201,168,76,.06)}
+.coord-row{display:flex;gap:1rem;flex-wrap:wrap}
+.coord-card{background:var(--card-glass);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.4rem;min-width:180px;backdrop-filter:blur(8px);transition:all .3s}
+.coord-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.cc-n{font-weight:600;font-size:.88rem;color:var(--white);margin-bottom:.3rem}
+.cc-p{font-size:.78rem;color:var(--gold)}
+
+/* REGISTER */
+.reg-wrap{background:rgba(7,18,40,.52);border:1px solid var(--border);border-radius:16px;padding:2.5rem;backdrop-filter:blur(20px);box-shadow:0 8px 64px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05);position:relative;overflow:hidden}
+.reg-wrap::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at center,rgba(201,168,76,.03),transparent 55%);pointer-events:none;animation:regGlow 7s ease-in-out infinite}
+@keyframes regGlow{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+.reg-grid{display:grid;grid-template-columns:3fr 2fr;gap:2.5rem;align-items:start}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.field{margin-bottom:1.3rem}
+.field label{display:block;font-family:'Orbitron',monospace;font-size:.59rem;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:.55rem;transition:color .3s}
+.field:focus-within label{color:var(--gold-l)}
+.field input,.field select,.field textarea{width:100%;background:rgba(2,4,8,.65);border:1px solid rgba(201,168,76,.18);color:var(--white);padding:.78rem 1.1rem;font-family:'Poppins',sans-serif;font-size:.86rem;border-radius:6px;outline:none;transition:border-color .3s,box-shadow .3s,background .3s;-webkit-appearance:none;appearance:none;backdrop-filter:blur(4px)}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);background:rgba(7,18,40,.85);box-shadow:0 0 0 3px rgba(201,168,76,.08),0 0 20px rgba(201,168,76,.05)}
+.field input::placeholder,.field textarea::placeholder{color:rgba(106,125,150,.45)}
+.field select option{background:#071220;color:var(--white)}
+.sub-btn{width:100%;padding:1rem;font-family:'Orbitron',monospace;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;background:linear-gradient(135deg,rgba(201,168,76,.28),rgba(201,168,76,.14));border:1px solid rgba(201,168,76,.5);color:var(--gold-l);border-radius:6px;cursor:pointer;position:relative;overflow:hidden;transition:all .4s var(--ease);backdrop-filter:blur(8px)}
+.sub-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(201,168,76,.2),transparent);transition:left .5s}
+.sub-btn:hover{background:rgba(201,168,76,.38);border-color:var(--gold);box-shadow:0 0 40px rgba(201,168,76,.3),0 8px 32px rgba(0,0,0,.3);transform:translateY(-2px)}
+.sub-btn:hover::before{left:100%}
+.sub-btn:active{transform:translateY(0) scale(.98)}
+.qr-panel{background:rgba(7,18,40,.7);border:1px solid var(--border);border-radius:12px;padding:1.8rem;text-align:center;backdrop-filter:blur(12px)}
+.qr-t{font-family:'Orbitron',monospace;font-size:.6rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:1.2rem;display:block}
+.qr-wrap{position:relative;width:130px;margin:0 auto 1rem}
+.qr-img{width:130px;height:130px;border:2px solid rgba(201,168,76,.25);border-radius:8px;display:grid;grid-template-columns:repeat(9,1fr);gap:2px;padding:8px;background:rgba(2,4,8,.85);animation:qrGlow 3.5s ease-in-out infinite}
+@keyframes qrGlow{0%,100%{box-shadow:0 0 0 rgba(201,168,76,0)}50%{box-shadow:0 0 28px rgba(201,168,76,.28)}}
+.qrc{border-radius:1.5px}.qrc.b{background:var(--gold);opacity:.85}.qrc.w{background:transparent}
+.qr-c{position:absolute;width:15px;height:15px;border-color:var(--gold);border-style:solid;border-width:2px;animation:qrcGlow 2s ease-in-out infinite}
+.qr-c.tl{top:0;left:0;border-right:none;border-bottom:none;border-radius:4px 0 0 0}
+.qr-c.tr{top:0;right:0;border-left:none;border-bottom:none;border-radius:0 4px 0 0}
+.qr-c.bl{bottom:0;left:0;border-right:none;border-top:none;border-radius:0 0 0 4px}
+.qr-c.br{bottom:0;right:0;border-left:none;border-top:none;border-radius:0 0 4px 0}
+@keyframes qrcGlow{0%,100%{opacity:.55}50%{opacity:1}}
+.upi-box{margin-top:1rem;padding:.75rem;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:6px}
+.upi-l{font-family:'Orbitron',monospace;font-size:.55rem;color:var(--dim);letter-spacing:2px;display:block;margin-bottom:.3rem}
+.upi-id{font-family:'Orbitron',monospace;font-size:.85rem;color:var(--gold-l);font-weight:700}
+.pay-note{font-size:.76rem;color:var(--dim);line-height:1.7;margin-top:.9rem}
+.notice-box{background:rgba(7,18,40,.6);border:1px solid var(--border);border-radius:8px;padding:1.2rem;font-size:.76rem;color:var(--dim);line-height:2;margin-top:1.2rem;backdrop-filter:blur(8px)}
+.nb-t{font-family:'Orbitron',monospace;font-size:.56rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:.6rem}
+
+/* ABOUT */
+.about-split{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-bottom:5rem}
+.orb-wrap{height:320px;display:flex;align-items:center;justify-content:center;position:relative}
+.orb-ring{position:absolute;border:1px solid rgba(201,168,76,.1);border-radius:50%;animation:orbSpin 22s linear infinite}
+.orb-ring:nth-child(2){animation-duration:32s;animation-direction:reverse;border-color:rgba(37,99,212,.08)}
+.orb-ring:nth-child(3){animation-duration:16s;border-color:rgba(201,168,76,.05)}
+@keyframes orbSpin{to{transform:rotate(360deg)}}
+.orb-planet{width:88px;height:88px;border-radius:50%;background:radial-gradient(circle at 33% 33%,#1a3c72,#020408 82%);box-shadow:0 0 60px rgba(26,60,114,.6),0 0 120px rgba(26,60,114,.2),inset -12px -12px 24px rgba(0,0,0,.6);animation:orbGlow 4s ease-in-out infinite}
+@keyframes orbGlow{0%,100%{box-shadow:0 0 60px rgba(26,60,114,.6)}50%{box-shadow:0 0 100px rgba(37,99,212,.85)}}
+.orb-moon1{position:absolute;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--gold-l),#5a4a20);box-shadow:0 0 12px rgba(201,168,76,.8);animation:moon1 7s linear infinite}
+@keyframes moon1{from{transform:rotate(0deg) translateX(-140px)}to{transform:rotate(360deg) translateX(-140px)}}
+.orb-moon2{position:absolute;width:8px;height:8px;border-radius:50%;background:#aaa;box-shadow:0 0 6px rgba(180,180,180,.4);animation:moon2 4.5s linear infinite reverse}
+@keyframes moon2{from{transform:rotate(0deg) translateX(-88px)}to{transform:rotate(360deg) translateX(-88px)}}
+.about-text h2{font-family:'Orbitron',monospace;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:var(--white);margin-bottom:1.2rem;line-height:1.2}
+.about-text h2 em{color:var(--gold);font-style:normal}
+.about-text p{color:var(--dim);line-height:1.95;font-size:.88rem;font-weight:300;margin-bottom:.9rem}
+.pm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(218px,1fr));gap:1rem}
+.pm-card{background:rgba(7,18,40,.6);border:1px solid var(--border);border-radius:8px;padding:1.3rem;display:flex;gap:.9rem;align-items:flex-start;transition:all .4s var(--ease);cursor:pointer;backdrop-filter:blur(8px)}
+.pm-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.4),0 0 20px rgba(201,168,76,.06)}
+.pm-icon{font-size:1.7rem;flex-shrink:0}
+.pm-pn{font-family:'Orbitron',monospace;font-size:.7rem;color:var(--white);font-weight:700;margin-bottom:.18rem}
+.pm-ev{font-size:.72rem;color:var(--gold);margin-bottom:.25rem;font-weight:500}
+.pm-d{font-size:.72rem;color:var(--dim);font-weight:300;line-height:1.5}
+.club-card{margin-top:5rem;background:radial-gradient(ellipse at center,rgba(37,99,212,.07),transparent 60%),rgba(7,18,40,.6);border:1px solid var(--border);border-radius:16px;padding:3.5rem;text-align:center;backdrop-filter:blur(8px);position:relative;overflow:hidden}
+.club-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.05),transparent 55%);pointer-events:none}
+.club-n{font-family:'Orbitron',monospace;font-size:1.9rem;font-weight:900;color:var(--white);margin-bottom:.5rem}
+.club-n em{color:var(--gold);font-style:normal}
+
+/* TIMELINE */
+.tl-outer{position:relative}
+.tl-line-wrap{position:absolute;left:50%;top:0;bottom:0;transform:translateX(-50%);width:1px;overflow:hidden;pointer-events:none}
+.tl-fill{width:100%;background:linear-gradient(180deg,var(--gold),rgba(201,168,76,.25));transform-origin:top;transform:scaleY(0);transition:transform .08s linear}
+.tl-items{position:relative}
+.tl-item{display:grid;grid-template-columns:1fr 72px 1fr;gap:2rem;margin-bottom:4rem;align-items:center;opacity:0;transform:translateY(35px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.tl-item.vis{opacity:1;transform:translateY(0)}
+.tl-content{background:rgba(7,18,40,.7);border:1px solid var(--border);border-radius:10px;padding:1.6rem;cursor:pointer;transition:all .4s var(--ease);backdrop-filter:blur(8px)}
+.tl-content:hover{border-color:var(--border2);transform:scale(1.03);box-shadow:0 0 30px rgba(201,168,76,.08)}
+.tl-node{width:58px;height:58px;border-radius:50%;background:rgba(7,18,40,.9);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 0 0 6px rgba(201,168,76,.05);justify-self:center;transition:box-shadow .4s;animation:nodeGlow 3.5s ease-in-out infinite}
+@keyframes nodeGlow{0%,100%{box-shadow:0 0 15px rgba(201,168,76,.15),0 0 0 6px rgba(201,168,76,.04)}50%{box-shadow:0 0 35px rgba(201,168,76,.45),0 0 0 8px rgba(201,168,76,.1)}}
+.tl-pn{font-family:'Orbitron',monospace;font-size:.58rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:.35rem}
+.tl-en{font-family:'Orbitron',monospace;font-size:.9rem;font-weight:700;color:var(--white);margin-bottom:.45rem}
+.tl-d{font-size:.8rem;color:var(--dim);line-height:1.65;font-weight:300}
+.tl-tags{display:flex;gap:.6rem;margin-top:.8rem;flex-wrap:wrap}
+.tl-tag{font-size:.6rem;color:var(--gold);border:1px solid rgba(201,168,76,.25);padding:.2rem .55rem;border-radius:2px;font-family:'Orbitron',monospace;letter-spacing:1px}
+
+/* SPONSORS */
+.sp-tier{margin-bottom:3.5rem}
+.sp-tier-l{font-family:'Orbitron',monospace;font-size:.62rem;letter-spacing:4px;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem}
+.sp-tier-l::before,.sp-tier-l::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+.sp-row{display:flex;gap:1.2rem;flex-wrap:wrap;justify-content:center}
+.sp-box{background:rgba(7,18,40,.6);border:1px solid var(--border);border-radius:10px;padding:1.5rem 2.5rem;display:flex;align-items:center;justify-content:center;min-width:150px;min-height:72px;transition:all .4s var(--ease);cursor:default;backdrop-filter:blur(8px)}
+.sp-box:hover{border-color:var(--border2);transform:translateY(-5px);box-shadow:0 15px 40px rgba(0,0,0,.5),0 0 20px rgba(201,168,76,.07)}
+.sp-nm{font-family:'Orbitron',monospace;font-size:.68rem;color:var(--dim);letter-spacing:1.5px;text-align:center;transition:color .3s}
+.sp-box:hover .sp-nm{color:var(--gold)}
+.sp-cta{margin-top:4.5rem;background:linear-gradient(145deg,rgba(10,25,55,.82),rgba(5,12,24,.96));border:1px solid var(--border);border-radius:16px;padding:3.5rem;text-align:center}
+
+/* CONTACT */
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+.ct-info{display:flex;flex-direction:column;gap:1.4rem}
+.ct-item{display:flex;gap:1rem;align-items:flex-start}
+.ct-ico{width:40px;height:40px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;color:var(--gold);transition:all .3s;background:rgba(201,168,76,.05)}
+.ct-item:hover .ct-ico{border-color:var(--border2);background:rgba(201,168,76,.1);box-shadow:0 0 15px rgba(201,168,76,.15)}
+.ct-l{font-family:'Orbitron',monospace;font-size:.57rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:.3rem;display:block}
+.ct-v{font-size:.86rem;color:var(--white);line-height:1.7}
+.ct-form-w{background:rgba(7,18,40,.52);border:1px solid var(--border);border-radius:12px;padding:2rem;backdrop-filter:blur(12px)}
+.fc-card{background:rgba(7,18,40,.7);border:1px solid var(--border);border-radius:8px;padding:1.4rem;backdrop-filter:blur(8px)}
+.fc-t{font-family:'Orbitron',monospace;font-size:.57rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:.7rem}
+.fc-n{font-weight:600;font-size:.88rem;color:var(--white);margin-bottom:.2rem}
+.fc-r{font-size:.8rem;color:var(--dim);margin-bottom:.3rem}
+.fc-e{font-size:.8rem;color:var(--gold)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:3rem 2.5rem;background:linear-gradient(180deg,var(--deep),var(--black));position:relative;z-index:1}
+.ft-inner{max-width:1100px;margin:0 auto;text-align:center}
+.ft-logo{font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:900;letter-spacing:6px;background:linear-gradient(90deg,var(--gold-l),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.4rem}
+.ft-sub{font-size:.72rem;color:var(--dim2);letter-spacing:2px;margin-bottom:1.5rem}
+.ft-div{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:.8rem auto 1.5rem;opacity:.35}
+.ft-links{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
+.ft-link{font-family:'Orbitron',monospace;font-size:.57rem;color:var(--dim2);letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:color .25s}
+.ft-link:hover{color:var(--gold)}
+.ft-copy{font-size:.7rem;color:rgba(106,125,150,.5)}
+
+/* BACK */
+.back-btn{display:inline-flex;align-items:center;gap:.5rem;font-family:'Orbitron',monospace;font-size:.6rem;letter-spacing:2px;color:var(--dim);text-transform:uppercase;cursor:pointer;margin-bottom:2rem;transition:color .3s;border:none;background:none;padding:0}
+.back-btn:hover{color:var(--gold)}
+
+/* UTILS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:.8rem 1.2rem}.nav-links{display:none}.nav-ham{display:flex}
+  .hero{padding:6rem 1.2rem 4rem}
+  .countdown{gap:.5rem}.cd-box{min-width:60px;padding:.7rem .8rem}.cd-num{font-size:1.5rem}
+  .hero-meta{gap:1.5rem}
+  .section{padding:4rem 1.2rem}
+  .about-split{grid-template-columns:1fr}.orb-wrap{height:220px}
+  .tl-line-wrap{left:32px}
+  .tl-item{grid-template-columns:52px 1fr!important;gap:.8rem!important}
+  .tl-node{width:46px!important;height:46px!important;font-size:1.1rem!important;justify-self:start!important}
+  .tl-empty{display:none!important}
+  .tl-content{grid-column:2!important}
+  .ct-grid,.reg-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+}
+@media(max-width:500px){
+  .hero-title{font-size:3rem!important;letter-spacing:2px!important}
+  .hero-btns{flex-direction:column;align-items:center}
+  .btn-g{width:100%;max-width:280px}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div><div id="cur-ring"></div>
+<canvas id="galaxy"></canvas>
+<div id="veil"></div>
+
+<div id="loader">
+  <div class="ld-scene">
+    <div class="ld-ring-wrap"><div class="ld-ring"></div></div>
+    <div class="ld-orbit"><div class="ld-moon"></div></div>
+    <div class="ld-planet"></div>
+  </div>
+  <div class="ld-logo" id="ldLogo"></div>
+  <div class="ld-progress"><div class="ld-bar" id="ldBar"></div></div>
+  <div class="ld-status" id="ldStatus">Mapping the cosmos…</div>
+</div>
+
+<nav id="nav">
+  <div class="nav-logo" onclick="go('home')">INSTE<span style="-webkit-text-fill-color:var(--white)">LLATION</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a data-p="home" onclick="go('home')">Home</a></li>
+    <li><a data-p="events" onclick="go('events')">Universe</a></li>
+    <li><a data-p="timeline" onclick="go('timeline')">Timeline</a></li>
+    <li><a data-p="about" onclick="go('about')">About</a></li>
+    <li><a data-p="sponsors" onclick="go('sponsors')">Sponsors</a></li>
+    <li><a data-p="contact" onclick="go('contact')">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="go('register')">Register Now</button>
+  <button class="nav-ham" id="hamBtn" onclick="toggleM()"><span></span><span></span><span></span></button>
+</nav>
+<div class="m-menu" id="mMenu">
+  <button class="m-close" onclick="toggleM()">✕</button>
+  <a onclick="go('home');toggleM()">Home</a>
+  <a onclick="go('events');toggleM()">Universe</a>
+  <a onclick="go('timeline');toggleM()">Timeline</a>
+  <a onclick="go('about');toggleM()">About</a>
+  <a onclick="go('sponsors');toggleM()">Sponsors</a>
+  <a onclick="go('contact');toggleM()">Contact</a>
+  <a onclick="go('register');toggleM()" style="color:var(--gold)">✦ Register Now</a>
+</div>
+
+<div id="app"></div>
+
+<script>
+/* DATA */
+const EV=[
+  {id:'sun',icon:'☀️',planet:'The Sun',order:1,name:'Ignite the Sun',sub:'Tech Talk',
+   cpStyle:'background:radial-gradient(circle at 30% 30%,#ffdd80,#e8a000 50%,#a05000 80%);',cpClass:'',
+   cpg:'0 0 28px rgba(255,180,0,.6)',cpgh:'0 0 60px rgba(255,210,0,.9)',hasSR:false,
+   dtBg:'radial-gradient(circle at 30% 30%,#ffdd80,#e8a000 50%,#a05000 80%)',dtSh:'0 0 80px rgba(255,180,0,.5)',dtRing:false,
+   desc:'Ignite the minds of future technologists through powerful talks by industry veterans and academic pioneers. Share ideas that spark the next revolution.',
+   prize:'₹5,000',team:'Individual',fee:'Free Entry',
+   rules:['Duration: 15 minutes per speaker','Topic must be technology-related','No political or religious content','Q&A session of 5 minutes follows','Judged on depth, delivery & innovation','Pre-register 2 days before event'],
+   coords:[{name:'Rohan Sharma',ph:'+91 98765 43210'},{name:'Priya Menon',ph:'+91 98765 43211'}]},
+  {id:'mercury',icon:'⚡',planet:'Mercury',order:2,name:'Outrun Mercury',sub:'Machine Hack — Coding',
+   cpStyle:'background:radial-gradient(circle at 30% 30%,#c0b090,#8a7460 45%,#4a3c30 80%);',cpClass:'',
+   cpg:'0 0 22px rgba(150,120,80,.5)',cpgh:'0 0 48px rgba(200,170,120,.8)',hasSR:false,
+   dtBg:'radial-gradient(circle at 30% 30%,#c0b090,#8a7460 45%,#4a3c30 80%)',dtSh:'0 0 80px rgba(150,120,80,.5)',dtRing:false,
+   desc:'Race against time to crack complex algorithms and machine logic. Speed meets intelligence in this high-velocity coding arena where only the fastest minds prevail.',
+   prize:'₹10,000',team:'1–2 Members',fee:'₹100/team',
+   rules:['Teams of 1 or 2 members only','3 rounds: MCQ → Coding → Final Hack','No external libraries unless specified','Internet only for documentation','Plagiarism = instant disqualification','Faster submission earns more points'],
+   coords:[{name:'Karthik Raj',ph:'+91 98765 43212'},{name:'Sindhu B',ph:'+91 98765 43213'}]},
+  {id:'earth',icon:'🌍',planet:'Earth',order:3,name:'Shape the Earth',sub:'Celestial Canvas — Web Design',
+   cpStyle:'',cpClass:'earth-p',
+   cpg:'0 0 28px rgba(30,144,255,.5)',cpgh:'0 0 55px rgba(30,200,100,.75)',hasSR:false,
+   dtBg:'radial-gradient(circle at 40% 40%,#1e9064,#0a5028 40%,#020f08 100%)',dtSh:'0 0 80px rgba(30,144,100,.5)',dtRing:false,
+   desc:'Design breathtaking interfaces that blend usability with aesthetic elegance. Create your universe on the web canvas and reshape digital experience.',
+   prize:'₹8,000',team:'1–3 Members',fee:'₹150/team',
+   rules:['3-hour competitive design sprint','Any design tool permitted (Figma, XD…)','Theme revealed on event day','Working prototype required','Judged on UI, UX, creativity & responsiveness','5-minute presentation per team'],
+   coords:[{name:'Anjali Nair',ph:'+91 98765 43214'},{name:'Vivek Kumar',ph:'+91 98765 43215'}]},
+  {id:'mars',icon:'🔴',planet:'Mars',order:4,name:'Capture Mars',sub:'Stellar Shots — Photography',
+   cpStyle:'background:radial-gradient(circle at 32% 32%,#d4613a,#9c2f10 50%,#5a1a05 82%);',cpClass:'mars-p',
+   cpg:'0 0 28px rgba(180,60,20,.6)',cpgh:'0 0 60px rgba(220,80,30,.9)',hasSR:false,
+   dtBg:'radial-gradient(circle at 32% 32%,#d4613a,#9c2f10 50%,#5a1a05 82%)',dtSh:'0 0 80px rgba(180,60,20,.6)',dtRing:false,
+   desc:'Wield your lens across campus and frame the extraordinary within the ordinary. The red planet awaits the bold vision of a stellar photographer.',
+   prize:'₹6,000',team:'Individual',fee:'₹50',
+   rules:['Shooting zone: DSATM Campus only','2-hour window for shooting','Submit 3–5 final edited photos','No AI-generated images allowed','DSLR and mobile both permitted','RAW files may be requested for verification'],
+   coords:[{name:'Deepa Rao',ph:'+91 98765 43216'},{name:'Arjun Shetty',ph:'+91 98765 43217'}]},
+  {id:'jupiter',icon:'🟠',planet:'Jupiter',order:5,name:'Decode Jupiter',sub:'Meteor Minds — IT Quiz',
+   cpStyle:'background:radial-gradient(circle at 30% 30%,#d4893a,#a05020 45%,#4a2010 80%);',cpClass:'',
+   cpg:'0 0 25px rgba(180,100,30,.5)',cpgh:'0 0 52px rgba(200,130,50,.8)',hasSR:false,
+   dtBg:'radial-gradient(circle at 30% 30%,#d4893a,#a05020 45%,#4a2010 80%)',dtSh:'0 0 80px rgba(180,100,30,.5)',dtRing:false,
+   desc:'Test the depths of your technical knowledge in this multi-round quiz odyssey spanning computer science, AI, networking, and the frontiers of current tech.',
+   prize:'₹12,000',team:'2 Members',fee:'₹100/team',
+   rules:['Teams of exactly 2 members','4 rounds: Rapid Fire → Visual → Buzzer → Finals','No electronic devices during rounds','Quiz master decision is final','Topics: CS, AI/ML, Networking, Tech history','Tie-breakers ready if needed'],
+   coords:[{name:'Meera Pillai',ph:'+91 98765 43218'},{name:'Arun Das',ph:'+91 98765 43219'}]},
+  {id:'saturn',icon:'🪐',planet:'Saturn',order:6,name:'Command Saturn',sub:'Starfleet Strategist — IT Manager',
+   cpStyle:'background:radial-gradient(circle at 32% 28%,#e0c070,#b0905a 40%,#6a5030 75%);',cpClass:'',
+   cpg:'0 0 25px rgba(180,150,70,.4)',cpgh:'0 0 52px rgba(200,170,80,.7)',hasSR:true,
+   dtBg:'radial-gradient(circle at 32% 28%,#e0c070,#b0905a 40%,#6a5030 75%)',dtSh:'0 0 80px rgba(180,150,70,.4)',dtRing:true,
+   desc:'Simulate real-world IT management scenarios. Lead your starfleet through crises, resource allocation, and critical technology decisions under pressure.',
+   prize:'₹10,000',team:'3–4 Members',fee:'₹200/team',
+   rules:['Teams of 3 to 4 members','Case study-based competition','3 rounds: Analysis → Strategy → Defense','Business acumen + technical knowledge needed','Max 10 slides, 8-minute presentation','Industry panel will cross-question teams'],
+   coords:[{name:'Naveen Gowda',ph:'+91 98765 43220'},{name:'Ritu Verma',ph:'+91 98765 43221'}]},
+  {id:'uranus',icon:'💠',planet:'Uranus',order:7,name:'Trace Uranus',sub:'Starhunt — Treasure Hunt',
+   cpStyle:'background:radial-gradient(circle at 35% 35%,#80d4e0,#2090a0 50%,#0a4a5a 82%);',cpClass:'',
+   cpg:'0 0 25px rgba(50,160,180,.5)',cpgh:'0 0 52px rgba(80,200,220,.75)',hasSR:false,
+   dtBg:'radial-gradient(circle at 35% 35%,#80d4e0,#2090a0 50%,#0a4a5a 82%)',dtSh:'0 0 80px rgba(50,160,180,.5)',dtRing:false,
+   desc:'Decode cryptic clues scattered across campus. A multi-stage hunt combining technical riddles, coding puzzles, and physical campus exploration.',
+   prize:'₹8,000',team:'2–4 Members',fee:'₹150/team',
+   rules:['Campus-wide hunt with 15+ checkpoints','Clues involve coding, logic and tech trivia','No GPS maps permitted during hunt','One device per team for digital clues','First team to complete all stages wins','Property damage = disqualification'],
+   coords:[{name:'Suresh Babu',ph:'+91 98765 43222'},{name:'Lakshmi T',ph:'+91 98765 43223'}]},
+  {id:'neptune',icon:'🌊',planet:'Neptune',order:8,name:'Survive Neptune',sub:'Cosmic Combat — BGMI',
+   cpStyle:'background:radial-gradient(circle at 30% 30%,#4090d4,#1050a0 45%,#061030 82%);',cpClass:'',
+   cpg:'0 0 28px rgba(40,100,200,.55)',cpgh:'0 0 58px rgba(60,140,220,.8)',hasSR:false,
+   dtBg:'radial-gradient(circle at 30% 30%,#4090d4,#1050a0 45%,#061030 82%)',dtSh:'0 0 80px rgba(40,100,200,.55)',dtRing:false,
+   desc:'Battle it out in the deep cosmic ocean. Only the most tactically elite squads will survive the Cosmic Combat arena and claim victory among the stars.',
+   prize:'₹15,000',team:'4 Members (Squad)',fee:'₹300/team',
+   rules:['BGMI Mobile — Erangel map only','Custom room details shared 1h before','Players must bring their own charged device','Cheating leads to permanent disqualification','3 matches; aggregate points decide winner','Slot confirmed only after fee payment'],
+   coords:[{name:'Rahul Hegde',ph:'+91 98765 43224'},{name:'Sneha Patil',ph:'+91 98765 43225'}]},
+];
+const ED = new Date('2025-05-06T09:00:00');
+let pg='home',eid=null,cdt=null,mOpen=false,tlObs=null;
+
+/* NAV */
+function go(p,id=null){
+  if(p===pg&&id===eid)return;
+  const v=document.getElementById('veil');
+  v.classList.add('in');
+  setTimeout(()=>{
+    pg=p;eid=id;
+    if(cdt){clearInterval(cdt);cdt=null;}
+    if(tlObs){tlObs.disconnect();tlObs=null;}
+    render();
+    document.querySelectorAll('.nav-links a[data-p]').forEach(a=>a.classList.toggle('active',a.dataset.p===p));
+    window.scrollTo(0,0);
+    v.classList.remove('in');
+  },480);
+}
+function toggleM(){mOpen=!mOpen;document.getElementById('mMenu').classList.toggle('open',mOpen);}
+
+/* COUNTDOWN */
+function fmt(n){return String(n).padStart(2,'0')}
+function getCD(){const d=Math.max(0,ED-new Date());return{d:Math.floor(d/86400000),h:Math.floor((d%86400000)/3600000),m:Math.floor((d%3600000)/60000),s:Math.floor((d%60000)/1000)}}
+function startCD(){
+  if(cdt)clearInterval(cdt);
+  function tick(){const e=document.getElementById('cd-d');if(!e){clearInterval(cdt);return;}const{d,h,m,s}=getCD();document.getElementById('cd-d').textContent=fmt(d);document.getElementById('cd-h').textContent=fmt(h);document.getElementById('cd-m').textContent=fmt(m);document.getElementById('cd-s').textContent=fmt(s);}
+  tick();cdt=setInterval(tick,1000);
+}
+
+/* GALAXY CANVAS */
+function initGalaxy(){
+  const cv=document.getElementById('galaxy'),ctx=cv.getContext('2d');
+  let W,H,stars=[],parts=[],t=0;
+  function resize(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;mkStars();}
+  function mkStars(){
+    stars=[];const n=Math.floor(W*H/4200);
+    for(let i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.2,a:Math.random(),da:(Math.random()-.5)*.005,hue:Math.random()>.9?(Math.random()>.5?200:40):0,sat:Math.random()>.9?55:0});
+    parts=[];for(let i=0;i<45;i++)parts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.14,r:Math.random()*.8+.2,a:Math.random()*.38+.05});
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);t+=.0018;
+    // Nebula layers
+    [[W*.2+W*.04*Math.sin(t),H*.3+H*.035*Math.cos(t*.7),W*.44,'rgba(14,38,118,']
+    ,[W*.8-W*.035*Math.sin(t*.8),H*.7+H*.045*Math.cos(t),W*.33,'rgba(80,18,8,']
+    ].forEach(([gx,gy,r,col])=>{const g=ctx.createRadialGradient(gx,gy,0,gx,gy,r);g.addColorStop(0,col+((.1+.03*Math.sin(t))+')'));g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);});
+    stars.forEach(s=>{s.a+=s.da;if(s.a<=.04||s.a>=1)s.da*=-1;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=s.sat>0?`hsla(${s.hue},${s.sat}%,80%,${s.a})`:`rgba(232,234,240,${s.a})`;ctx.fill();});
+    parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(201,168,76,${p.a})`;ctx.fill();});
+    requestAnimationFrame(draw);
+  }
+  resize();draw();window.addEventListener('resize',resize);
+}
+
+/* CURSOR */
+function initCursor(){
+  const dot=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+  (function a(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a);})();
+  document.addEventListener('mousedown',()=>{dot.style.width='4px';dot.style.height='4px';ring.style.width='48px';ring.style.height='48px';});
+  document.addEventListener('mouseup',()=>{dot.style.width='8px';dot.style.height='8px';ring.style.width='32px';ring.style.height='32px';});
+}
+
+/* SCROLL NAV */
+function initNav(){window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>55),{passive:true});}
+
+/* REVEAL */
+function initReveal(){
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';obs.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.clay,.pm-card,.dt-stat,.sp-box,.coord-card,.tl-content').forEach(el=>{if(!el.style.opacity){el.style.opacity='0';el.style.transform='translateY(26px)';el.style.transition='opacity .65s cubic-bezier(0.23,1,0.32,1),transform .65s cubic-bezier(0.23,1,0.32,1)';}obs.observe(el);});
+}
+
+/* TIMELINE */
+function initTL(){
+  const items=document.querySelectorAll('.tl-item'),fill=document.getElementById('tlFill');
+  tlObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.18});
+  items.forEach(el=>tlObs.observe(el));
+  if(fill){
+    function upd(){const o=document.getElementById('tlOuter');if(!o)return;const r=o.getBoundingClientRect();const pr=Math.max(0,Math.min(1,(window.innerHeight-r.top)/(r.height+window.innerHeight)));fill.style.transform=`scaleY(${pr})`;}
+    window.addEventListener('scroll',upd,{passive:true});upd();
+  }
+}
+
+/* CARD PLANET HTML */
+function mkPlanet(e){
+  const ring=e.hasSR?`<div class="sat-ring"></div>`:'';
+  return `<div class="cp-wrap"><div class="cp ${e.cpClass}" style="${e.cpStyle}--cpg:${e.cpg};--cpgh:${e.cpgh};">${ring}</div></div>`;
+}
+
+/* ── PAGES ── */
+function pgHome(){
+  const{d,h,m,s}=getCD();
+  const chars='INSTELLATION'.split('').map((c,i)=>`<span class="tc" style="--cd:${.68+i*.065}s">${c}</span>`).join('');
+  const fps=[
+    {s:95,t:'13%',l:'5%',bg:'radial-gradient(circle at 32% 32%,#2060d4,#0a1840 55%,#020408 82%)',gl:'rgba(32,96,212,.55)',dl:0,ring:true},
+    {s:58,t:'20%',r:'8%',bg:'radial-gradient(circle at 35% 30%,#b0883a,#6a4a20 50%,#020408 80%)',gl:'rgba(160,120,50,.5)',dl:2.5},
+    {s:44,b:'28%',l:'3%',bg:'radial-gradient(circle at 35% 35%,#206030,#0a3818 55%,#020408 82%)',gl:'rgba(32,96,48,.45)',dl:4.5},
+    {s:72,b:'20%',r:'6%',bg:'radial-gradient(circle at 36% 36%,#c04030,#7a1a10 50%,#020408 82%)',gl:'rgba(180,50,30,.5)',dl:1.2},
+  ].map((p,i)=>{
+    const pos=`${p.t?'top:'+p.t+';':''}${p.b?'bottom:'+p.b+';':''}${p.l?'left:'+p.l+';':''}${p.r?'right:'+p.r+';':''}`;
+    const ring=p.ring?`<div style="position:absolute;width:${Math.round(p.s*1.82)}px;height:${Math.round(p.s*.32)}px;border:2px solid rgba(201,168,76,.23);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%) rotateX(74deg);box-shadow:0 0 14px rgba(201,168,76,.1)"></div>`:'';
+    return `<div class="fp" style="width:${p.s}px;height:${p.s}px;${pos}background:${p.bg};box-shadow:0 0 40px ${p.gl},inset -10px -10px 20px rgba(0,0,0,.6);--dur:${9+i*1.5}s;--del:${p.dl}s;border-radius:50%">${ring}</div>`;
+  }).join('');
+  return`<div class="page hero">
+  <div class="hero-glow hero-glow-1"></div><div class="hero-glow hero-glow-2"></div>
+  <div class="planet-sys">${fps}</div>
+  <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center">
+    <span class="hero-eyebrow">Xccurate Club &nbsp;·&nbsp; MCA Department &nbsp;·&nbsp; DSATM Campus</span>
+    <div style="position:relative"><div class="hero-title">${chars}</div><div class="title-shimmer"></div></div>
+    <p class="hero-tagline">Navigate the Technical Universe &nbsp;·&nbsp; May 6, 2025</p>
+    <div class="hero-meta">
+      <div class="hm-item"><div class="hm-l">Venue</div><div class="hm-v">DSATM, Bengaluru</div></div>
+      <div class="hm-item"><div class="hm-l">Date</div><div class="hm-v">May 6, 2025</div></div>
+      <div class="hm-item"><div class="hm-l">Events</div><div class="hm-v">8 Planets</div></div>
+      <div class="hm-item"><div class="hm-l">Prize Pool</div><div class="hm-v">₹74,000+</div></div>
+    </div>
+    <div class="countdown">
+      <div class="cd-box"><span class="cd-num" id="cd-d">${fmt(d)}</span><span class="cd-lbl">Days</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-box"><span class="cd-num" id="cd-h">${fmt(h)}</span><span class="cd-lbl">Hours</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-box"><span class="cd-num" id="cd-m">${fmt(m)}</span><span class="cd-lbl">Mins</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-box"><span class="cd-num" id="cd-s">${fmt(s)}</span><span class="cd-lbl">Secs</span></div>
+    </div>
+    <div class="hero-btns">
+      <button class="btn-g btn-p" onclick="go('events')">Explore Events →</button>
+      <button class="btn-g btn-o" onclick="go('register')">Register Now</button>
+      <button class="btn-g btn-ghost" onclick="dlB()">⬇ Brochure</button>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-mouse"><div class="scroll-wheel"></div></div><span>Scroll to Explore</span></div>
+</div>
+<div class="para-band"><div class="para-text">INSTELLATION 2025 · MCA · DSATM · XCCURATE · BENGALURU ·</div></div>
+<div style="position:relative;z-index:1;background:linear-gradient(180deg,rgba(5,12,24,.8),rgba(2,4,8,.9))">
+<div class="section">
+  <div class="s-header"><span class="s-label">The Galaxy Awaits</span><h2 class="s-title">8 <em>Celestial</em> Events</h2><p class="s-desc">Each event orbits a planet in the Instellation galaxy. Navigate the cosmos and claim your constellation.</p><div class="s-line"></div></div>
+  <div class="events-grid">${EV.slice(0,4).map(e=>`<div class="clay" onclick="go('detail','${e.id}')">${mkPlanet(e)}<div class="e-plbl">${e.planet}</div><div class="e-name">${e.name}</div><div class="e-sub">${e.sub}</div><div class="e-desc">${e.desc.substring(0,80)}…</div><div class="e-footer"><div class="efi"><div class="efi-l">Prize</div><div class="efi-v">${e.prize}</div></div><div class="efi"><div class="efi-l">Team</div><div class="efi-v">${e.team}</div></div></div><span class="e-cta">View →</span></div>`).join('')}</div>
+  <div style="text-align:center;margin-top:2.5rem"><button class="btn-g btn-o" onclick="go('events')">View All 8 Events →</button></div>
+</div></div>`;
+}
+
+function pgEvents(){
+  return`<div class="page" style="padding-top:5.5rem;background:linear-gradient(180deg,rgba(5,12,24,.6),transparent)">
+<div class="section"><div class="s-header"><span class="s-label">Navigate the Galaxy</span><h2 class="s-title">The <em>Universe</em> of Events</h2><p class="s-desc">Eight planets. Eight disciplines. One extraordinary journey through the Instellation galaxy.</p><div class="s-line"></div></div>
+<div class="events-grid">${EV.map(e=>`<div class="clay" onclick="go('detail','${e.id}')">${mkPlanet(e)}<div class="e-plbl">${e.planet}</div><div class="e-name">${e.name}</div><div class="e-sub">${e.sub}</div><div class="e-desc">${e.desc}</div><div class="e-footer"><div class="efi"><div class="efi-l">Prize</div><div class="efi-v">${e.prize}</div></div><div class="efi"><div class="efi-l">Team</div><div class="efi-v">${e.team}</div></div><div class="efi"><div class="efi-l">Fee</div><div class="efi-v">${e.fee}</div></div></div><span class="e-cta">Details →</span></div>`).join('')}
+</div></div></div>`;
+}
+
+function pgDetail(){
+  const e=EV.find(x=>x.id===eid);if(!e)return pgEvents();
+  const ring=e.dtRing?`<div class="dt-ring"></div>`:'';
+  return`<div class="page" style="padding-top:5rem"><div style="max-width:860px;margin:0 auto;padding:2rem 2rem 0"><button class="back-btn" onclick="go('events')">← Back to Universe</button></div>
+<div class="dt-hero"><div class="dt-planet" style="background:${e.dtBg};box-shadow:${e.dtSh};">${ring}</div><span class="dt-lbl">${e.planet} · Instellation 2025 · Event #${e.order}</span><h1 class="dt-title">${e.name}</h1><p class="dt-sub">${e.sub}</p></div>
+<div style="max-width:860px;margin:0 auto;padding:2rem 2rem 4rem">
+<div class="dt-stats"><div class="dt-stat"><span class="dts-l">Prize Pool</span><span class="dts-v">${e.prize}</span></div><div class="dt-stat"><span class="dts-l">Team Size</span><span class="dts-v">${e.team}</span></div><div class="dt-stat"><span class="dts-l">Entry Fee</span><span class="dts-v">${e.fee}</span></div><div class="dt-stat"><span class="dts-l">Date</span><span class="dts-v">May 6, 2025</span></div></div>
+<div class="dt-sec"><h3>About the Event</h3><p class="dt-p">${e.desc}</p></div>
+<div class="dt-sec"><h3>Rules &amp; Regulations</h3><ul class="rules-ul">${e.rules.map(r=>`<li>${r}</li>`).join('')}</ul></div>
+<div class="dt-sec"><h3>Event Coordinators</h3><div class="coord-row">${e.coords.map(c=>`<div class="coord-card"><div class="cc-n">${c.name}</div><div class="cc-p">${c.ph}</div></div>`).join('')}</div></div>
+<div style="text-align:center;margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid var(--border)"><p style="color:var(--dim);font-size:.82rem;margin-bottom:1.5rem">Ready to embark on this mission?</p><button class="btn-g btn-p" onclick="go('register')" style="padding:.9rem 3rem">Register for ${e.name} →</button></div>
+</div></div>`;
+}
+
+function pgRegister(){
+  const qp=[1,1,1,0,1,0,1,1,1,1,0,1,0,0,0,1,0,1,1,0,1,1,0,1,1,0,1,0,0,0,0,1,0,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,0,1,0,0,0,0,1,0,1,1,0,1,1,0,1,1,0,1,0,0,0,1,0,1,1,1,1,0,1,0,1,1,1];
+  const qcells=qp.map(v=>`<div class="qrc ${v?'b':'w'}"></div>`).join('');
+  return`<div class="page" style="padding-top:5.5rem;padding-bottom:4rem"><div class="section" style="max-width:1000px">
+<div class="s-header"><span class="s-label">Begin Your Mission</span><h2 class="s-title">Mission <em>Registration</em></h2><p class="s-desc">Complete your registration sequence to secure your coordinates in the Instellation galaxy.</p><div class="s-line"></div></div>
+<div class="reg-wrap"><div class="reg-grid">
+<form onsubmit="hReg(event)">
+<div class="form-row"><div class="field"><label>Full Name</label><input type="text" placeholder="Your full name" required/></div><div class="field"><label>College / Institution</label><input type="text" placeholder="College name" required/></div></div>
+<div class="form-row"><div class="field"><label>Email Address</label><input type="email" placeholder="your@email.com" required/></div><div class="field"><label>Phone Number</label><input type="tel" placeholder="+91 XXXXX XXXXX" required/></div></div>
+<div class="field"><label>Select Event</label><select required><option value="" disabled selected>— Choose your planet —</option>${EV.map(e=>`<option value="${e.id}">${e.icon} ${e.name} — ${e.sub}</option>`).join('')}</select></div>
+<div class="form-row"><div class="field"><label>Team Name (if applicable)</label><input type="text" placeholder="Squad name"/></div><div class="field"><label>Year of Study</label><select required><option value="" disabled selected>— Year —</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>Final Year</option></select></div></div>
+<div class="field"><label>Department / Course</label><input type="text" placeholder="MCA / B.Tech CSE / BCA…" required/></div>
+<div class="field"><label>UPI Transaction / UTR ID</label><input type="text" placeholder="Enter UTR after payment" required/></div>
+<button type="submit" class="sub-btn" id="rBtn">Launch Registration →</button>
+</form>
+<div>
+<div class="qr-panel"><span class="qr-t">Scan to Pay</span>
+<div class="qr-wrap"><div class="qr-img">${qcells}</div><div class="qr-c tl"></div><div class="qr-c tr"></div><div class="qr-c bl"></div><div class="qr-c br"></div></div>
+<div class="upi-box"><span class="upi-l">UPI ID</span><div class="upi-id">xccurate@upi</div></div>
+<p class="pay-note">Scan QR or use UPI ID to pay. Enter the UTR number in the form field above.</p>
+<div style="margin-top:1rem;padding:.75rem;background:rgba(7,18,40,.5);border-radius:6px;font-size:.7rem;color:var(--dim);line-height:2;border:1px solid rgba(201,168,76,.1)">${EV.map(e=>`<div style="display:flex;justify-content:space-between"><span>${e.icon} ${e.name.split(' ').slice(0,2).join(' ')}</span><span style="color:var(--gold)">${e.fee}</span></div>`).join('')}</div>
+</div>
+<div class="notice-box"><span class="nb-t">Important Notes</span>✦ Registration closes May 5, 2025<br>✦ Fee non-refundable after submission<br>✦ Carry college ID on event day<br>✦ Confirmation email within 24 hours<br>✦ On-spot registration not guaranteed</div>
+</div></div></div></div></div>`;
+}
+
+function pgAbout(){
+  return`<div class="page" style="padding-top:5.5rem"><div class="section">
+<div class="about-split">
+<div class="orb-wrap"><div class="orb-ring" style="width:260px;height:260px"></div><div class="orb-ring" style="width:180px;height:180px"></div><div class="orb-ring" style="width:120px;height:120px"></div><div class="orb-planet"></div><div class="orb-moon1"></div><div class="orb-moon2"></div></div>
+<div class="about-text"><span class="s-label" style="text-align:left;display:block;margin-bottom:.8rem">Our Concept</span><h2>What is <em>Instellation</em>?</h2><p>Instellation is the annual flagship technical festival of the MCA Department at DSATM, organized by the Xccurate Club. It is not just a fest — it is an entire galaxy built around technology, innovation, and raw intellect.</p><p>Each event is mapped to a celestial body. Just as planets have unique characteristics, each event challenges a distinct facet of technical skill — from algorithmic speed to strategic IT management.</p><p>The name fuses <em>installation</em> with <em>constellation</em> — a universe where tech skills form constellations that illuminate the way forward.</p><button class="btn-g btn-o" onclick="go('events')" style="margin-top:1rem">Explore the Galaxy →</button></div>
+</div>
+<div class="s-header"><span class="s-label">Celestial Mapping</span><h2 class="s-title">The <em>Planet</em> Key</h2><p class="s-desc">Every planet corresponds to an event chosen for its symbolic resonance with the challenge.</p><div class="s-line"></div></div>
+<div class="pm-grid">${EV.map(e=>`<div class="pm-card" onclick="go('detail','${e.id}')"><span class="pm-icon">${e.icon}</span><div><div class="pm-pn">${e.planet}</div><div class="pm-ev">${e.sub}</div><div class="pm-d">${e.desc.substring(0,62)}…</div></div></div>`).join('')}</div>
+<div class="club-card"><div class="club-n"><em>Xccurate</em> Club</div><div style="color:var(--dim);font-size:.88rem;margin-bottom:.3rem">Department of MCA · Dr. Ambedkar Institute of Technology (DSATM)</div><div style="color:var(--gold);font-size:.82rem;margin-bottom:2rem">Bengaluru, Karnataka — 560 082</div><div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap"><button class="btn-g btn-p" onclick="go('register')">Register Now</button><button class="btn-g btn-o" onclick="go('contact')">Contact Us</button></div></div>
+</div></div>`;
+}
+
+function pgTimeline(){
+  return`<div class="page" style="padding-top:5.5rem"><div class="section">
+<div class="s-header"><span class="s-label">The Interstellar Journey</span><h2 class="s-title">Rocket <em>Trajectory</em></h2><p class="s-desc">Follow the Instellation rocket as it journeys from the Sun to Neptune. Scroll to travel through the galaxy.</p><div class="s-line"></div></div>
+<div style="text-align:center;margin-bottom:3rem"><span style="font-size:2.5rem;display:inline-block;transform:rotate(-35deg);filter:drop-shadow(0 0 12px rgba(201,168,76,.7));animation:rktG 2s ease-in-out infinite">🚀</span></div>
+<div class="tl-outer" id="tlOuter"><div class="tl-line-wrap"><div class="tl-fill" id="tlFill"></div></div>
+<div class="tl-items">${EV.map((e,i)=>{
+  const c=`<div class="tl-content" onclick="go('detail','${e.id}')"><div class="tl-pn">${e.planet}</div><div class="tl-en">${e.name}</div><div class="tl-d">${e.sub} — ${e.desc.substring(0,90)}…</div><div class="tl-tags"><span class="tl-tag">${e.prize}</span><span class="tl-tag">${e.team}</span><span class="tl-tag">${e.fee}</span></div></div>`;
+  return`<div class="tl-item">${i%2===0?c:'<div class="tl-empty"></div>'}<div class="tl-node">${e.icon}</div>${i%2===0?'<div class="tl-empty"></div>':c}</div>`;
+}).join('')}</div></div></div></div>
+<style>@keyframes rktG{0%,100%{filter:drop-shadow(0 0 12px rgba(201,168,76,.7))}50%{filter:drop-shadow(0 0 25px rgba(201,168,76,1))}}</style>`;
+}
+
+function pgSponsors(){
+  const tiers=[{l:'Title Sponsors',s:['TechNova Inc.','Quantum Systems Global']},{l:'Gold Sponsors',s:['DataSphere Solutions','CloudEdge Technologies','ByteWave Tech']},{l:'Silver Sponsors',s:['DevCraft Labs','NexGen Solutions','StarCode HQ','AlphaNet Systems']},{l:'Community Partners',s:['IEEE DSATM','CSI Student Chapter','HackerEarth','LeetCode India']}];
+  return`<div class="page" style="padding-top:5.5rem"><div class="section">
+<div class="s-header"><span class="s-label">Stars Powering Our Galaxy</span><h2 class="s-title">Mission <em>Sponsors</em></h2><p class="s-desc">Grateful to the organizations and communities that fuel the Instellation universe.</p><div class="s-line"></div></div>
+${tiers.map(t=>`<div class="sp-tier"><div class="sp-tier-l">${t.l}</div><div class="sp-row">${t.s.map(s=>`<div class="sp-box"><div class="sp-nm">${s}</div></div>`).join('')}</div></div>`).join('')}
+<div class="sp-cta"><div style="font-family:'Orbitron',monospace;font-size:.64rem;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:1rem">Become a Sponsor</div><p style="color:var(--dim);font-size:.88rem;line-height:1.9;max-width:480px;margin:0 auto 2rem">Partner with Instellation 2025 and place your brand in front of 500+ tech enthusiasts, future engineers, and industry professionals from across Bengaluru.</p><div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap"><button class="btn-g btn-p" onclick="go('contact')">Get in Touch →</button><button class="btn-g btn-ghost" onclick="dlB()">⬇ Sponsorship Brochure</button></div></div>
+</div></div>`;
+}
+
+function pgContact(){
+  return`<div class="page" style="padding-top:5.5rem"><div class="section">
+<div class="s-header"><span class="s-label">Mission Control</span><h2 class="s-title">Contact <em>Us</em></h2><p class="s-desc">Reach our command center for queries, sponsorships, or any cosmic communication.</p><div class="s-line"></div></div>
+<div class="ct-grid">
+<div class="ct-info">
+<div class="ct-item"><div class="ct-ico">📍</div><div><span class="ct-l">Location</span><div class="ct-v">Dr. Ambedkar Institute of Technology (DSATM)<br>Bengaluru, Karnataka — 560 082</div></div></div>
+<div class="ct-item"><div class="ct-ico">📧</div><div><span class="ct-l">Email</span><div class="ct-v">xccurate@dsatm.edu.in<br>instellation2025@gmail.com</div></div></div>
+<div class="ct-item"><div class="ct-ico">📱</div><div><span class="ct-l">Phone</span><div class="ct-v">+91 98765 43210 — Event Coordinator<br>+91 98765 43211 — Club Head</div></div></div>
+<div class="ct-item"><div class="ct-ico">🌐</div><div><span class="ct-l">Social Media</span><div class="ct-v">@xccurate_dsatm<br>Instagram · LinkedIn · Twitter</div></div></div>
+<div class="fc-card"><span class="fc-t">Faculty Coordinator</span><div class="fc-n">Prof. [Faculty Coordinator Name]</div><div class="fc-r">Head of Department, MCA — DSATM</div><div class="fc-e">faculty@dsatm.edu.in</div></div>
+</div>
+<div class="ct-form-w"><div style="font-family:'Orbitron',monospace;font-size:.64rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:1.2rem">Send a Transmission</div>
+<form onsubmit="hContact(event)" style="display:flex;flex-direction:column;gap:1rem">
+<div class="field" style="margin:0"><label>Name</label><input type="text" placeholder="Your name" required/></div>
+<div class="field" style="margin:0"><label>Email</label><input type="email" placeholder="your@email.com" required/></div>
+<div class="field" style="margin:0"><label>Subject</label><input type="text" placeholder="Sponsorship / Query / Registration" required/></div>
+<div class="field" style="margin:0"><label>Message</label><textarea rows="5" placeholder="Write your message here…" required style="resize:vertical"></textarea></div>
+<button type="submit" class="sub-btn">Transmit Message →</button>
+</form></div>
+</div></div></div>`;
+}
+
+function renderFooter(){
+  const ps=['home','events','timeline','about','sponsors','contact','register'];
+  return`<footer><div class="ft-inner"><div class="ft-logo">INSTELLATION</div><div class="ft-sub">Xccurate Club · MCA Dept · DSATM · May 6, 2025</div><div class="ft-div"></div><div class="ft-links">${ps.map(p=>`<span class="ft-link" onclick="go('${p}')">${p.charAt(0).toUpperCase()+p.slice(1)}</span>`).join('')}</div><div class="ft-copy">© 2025 Instellation · All rights reserved · Crafted with ✦ by Xccurate</div></div></footer>`;
+}
+
+function render(){
+  let html='';
+  if(pg==='home')html=pgHome();
+  else if(pg==='events')html=pgEvents();
+  else if(pg==='detail')html=pgDetail();
+  else if(pg==='register')html=pgRegister();
+  else if(pg==='about')html=pgAbout();
+  else if(pg==='timeline')html=pgTimeline();
+  else if(pg==='sponsors')html=pgSponsors();
+  else if(pg==='contact')html=pgContact();
+  document.getElementById('app').innerHTML=html+renderFooter();
+  if(pg==='home')startCD();
+  setTimeout(()=>{initReveal();if(pg==='timeline')initTL();},60);
+}
+
+function hReg(e){e.preventDefault();const b=document.getElementById('rBtn');b.textContent='Launching…';b.style.opacity='.6';b.disabled=true;setTimeout(()=>{b.style.opacity='1';b.style.background='rgba(26,100,40,.4)';b.style.borderColor='rgba(50,180,80,.6)';b.style.color='#7de89a';b.textContent='✓ Registration Received! Check your email.';},1600);}
+function hContact(e){e.preventDefault();e.target.innerHTML=`<div style="text-align:center;padding:3rem"><div style="font-size:2rem;margin-bottom:1rem">✦</div><div style="font-family:'Orbitron',monospace;font-size:.82rem;color:var(--gold);letter-spacing:2px;margin-bottom:.5rem">Message Transmitted</div><div style="color:var(--dim);font-size:.82rem">We will respond within 24 hours.</div></div>`;}
+function dlB(){const txt=`INSTELLATION 2025\nXccurate Club · MCA Department · DSATM\nDate: May 6, 2025 | Venue: DSATM Campus, Bengaluru\n\n${'='.repeat(50)}\n\nEVENTS\n\n${EV.map(e=>`${e.icon} ${e.name} (${e.sub})\n   Planet: ${e.planet} | Prize: ${e.prize} | Team: ${e.team} | Fee: ${e.fee}\n   ${e.desc}`).join('\n\n')}\n\n${'='.repeat(50)}\n\nCONTACT: xccurate@dsatm.edu.in | +91 98765 43210\n\n© 2025 Instellation · Xccurate Club · DSATM`;const a=document.createElement('a');a.href='data:text/plain;charset=utf-8,'+encodeURIComponent(txt);a.download='Instellation_2025_Brochure.txt';a.click();}
+
+/* LOADER */
+function runLoader(){
+  const logo=document.getElementById('ldLogo'),bar=document.getElementById('ldBar'),status=document.getElementById('ldStatus');
+  const phases=['Mapping the cosmos…','Aligning planets…','Loading event data…','Calibrating countdown…','Ready for launch…'];
+  'INSTELLATION'.split('').forEach((c,i)=>{const s=document.createElement('span');s.className='ld-char';s.textContent=c;s.style.animationDelay=(.5+i*.07)+'s';logo.appendChild(s);});
+  let prog=0;const iv=setInterval(()=>{prog=Math.min(100,prog+Math.random()*8+3);bar.style.width=prog+'%';const pi=Math.min(4,Math.floor(prog/22));if(phases[pi])status.textContent=phases[pi];if(prog>=100){clearInterval(iv);setTimeout(()=>document.getElementById('loader').classList.add('gone'),400);}},80);
+}
+
+window.addEventListener('load',()=>{
+  initGalaxy();initCursor();initNav();render();runLoader();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+.galaxy-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden; /* Hide the overflow from massive circles */
+  padding-top: 50px;
+  padding-bottom: 40px;
+  background: transparent;
+}
+
+.galaxy-sun-wrapper {
+  position: absolute;
+  top: 150px;
+  left: 50%;
+  /* translate(-50%, -50%) handled natively by Framer Motion now */
+  z-index: 10;
+}
+
+.galaxy-sun {
+  width: 140px;
+  height: 140px;
+  /* A star emits light uniformly, with a blinding white core fading to yellow and orange at the corona */
+  background: radial-gradient(circle, #ffffff 10%, #fffde0 40%, #ffdf60 70%, #ff9500 90%, #ff3300 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 60px 15px rgba(255, 240, 180, 0.9),
+    0 0 100px 40px rgba(255, 170, 0, 0.7),
+    0 0 160px 80px rgba(255, 60, 0, 0.4),
+    0 0 250px 120px rgba(255, 20, 0, 0.2);
+  animation: pulse-sun-core 4s infinite alternate ease-in-out;
+  position: relative;
+}
+
+.sun-flare {
+  position: absolute;
+  top: -60%; left: -60%; right: -60%; bottom: -60%;
+  border-radius: 50%;
+  /* Conic gradient gives natural jagged sunrays shooting out from the sun */
+  background: conic-gradient(from 0deg, 
+    transparent 0%, rgba(255,180,50,0.3) 10%, 
+    transparent 20%, rgba(255,220,100,0.4) 35%, 
+    transparent 45%, rgba(255,80,0,0.2) 55%, 
+    transparent 70%, rgba(255,250,150,0.3) 85%, 
+    transparent 100%
+  );
+  filter: blur(8px);
+  animation: spin-flare 40s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes spin-flare {
+  0% { transform: rotate(0deg) scale(0.9); opacity: 0.7; }
+  50% { transform: rotate(180deg) scale(1.1); opacity: 1; }
+  100% { transform: rotate(360deg) scale(0.9); opacity: 0.7; }
+}
+
+@keyframes pulse-sun-core {
+  0% { box-shadow: 0 0 50px 10px rgba(255, 240, 180, 0.8), 0 0 90px 30px rgba(255, 170, 0, 0.6), 0 0 140px 60px rgba(255, 60, 0, 0.3), 0 0 200px 100px rgba(255, 20, 0, 0.1); }
+  100% { box-shadow: 0 0 80px 25px rgba(255, 255, 255, 1), 0 0 130px 50px rgba(255, 200, 0, 0.8), 0 0 200px 90px rgba(255, 80, 0, 0.5), 0 0 300px 150px rgba(255, 20, 0, 0.3); }
+}
+
+.galaxy-orbits-wrapper {
+  position: relative;
+  width: 100%;
+  pointer-events: none; /* Allows scrolling over the orbits */
+}
+
+/* Make sure inner cards are clickable */
+.galaxy-planet-group {
+  pointer-events: auto;
+}
+
+.galaxy-orbit-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.galaxy-orbit-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  box-sizing: border-box;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.02);
+}
+
+.galaxy-planet-group {
+  position: absolute;
+  width: 0;
+  height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  /* Centering logic moved to the planet itself for precision */
+}
+
+/* If angle is left, content flexes to the left of the planet */
+.galaxy-planet-group.left-side {
+  flex-direction: row-reverse;
+}
+
+/* The physical planet */
+.galaxy-planet {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #5a99ff, #001f5c);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  box-shadow: 
+    inset -10px -10px 10px rgba(0,0,0,0.6),
+    0 0 15px rgba(90, 153, 255, 0.6);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* 3D Realistic Texture Overlay */
+.galaxy-planet::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: inset -8px -8px 12px rgba(0, 0, 0, 0.85), inset 4px 4px 8px rgba(255, 255, 255, 0.6);
+  background: radial-gradient(circle at 30% 30%, transparent 40%, rgba(0,0,0,0.6) 90%);
+  pointer-events: none;
+}
+
+.galaxy-planet-group:hover .galaxy-planet {
+  transform: translate(-50%, -50%) scale(1.2);
+  box-shadow: 
+    inset -10px -10px 10px rgba(0,0,0,0.6),
+    0 0 25px rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Planet variations */
+.planet-0 { background: radial-gradient(circle at 30% 30%, #ff8c5a, #5c0f00); box-shadow: inset -10px -10px 10px rgba(0,0,0,0.6), 0 0 15px rgba(255, 140, 90, 0.6); }
+.planet-1 { background: radial-gradient(circle at 30% 30%, #5aff9f, #005c2a); box-shadow: inset -10px -10px 10px rgba(0,0,0,0.6), 0 0 15px rgba(90, 255, 159, 0.6); }
+.planet-2 { background: radial-gradient(circle at 30% 30%, #c45aff, #3f005c); box-shadow: inset -10px -10px 10px rgba(0,0,0,0.6), 0 0 15px rgba(196, 90, 255, 0.6); }
+.planet-3 { background: radial-gradient(circle at 30% 30%, #ffe95a, #5c4d00); box-shadow: inset -10px -10px 10px rgba(0,0,0,0.6), 0 0 15px rgba(255, 233, 90, 0.6); }
+
+/* Planet Rings / Accents */
+.galaxy-planet-accent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 180%;
+  height: 40%;
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%) rotate(25deg);
+  pointer-events: none;
+}
+.p-accent-0 { display: none; }
+.p-accent-1 { border-color: rgba(255, 255, 255, 0.4); border-top-color: transparent; border-bottom-color: transparent; }
+.p-accent-2 { width: 140%; height: 140%; transform: translate(-50%, -50%); border: 1px dashed rgba(255,255,255,0.5); animation: spin-ring 10s linear infinite; }
+
+@keyframes spin-ring {
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.galaxy-event-content {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: 30px; /* Offset to the right of planet center */
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.left-side .galaxy-event-content {
+  left: auto;
+  right: 30px; /* Offset to the left of planet center */
+  flex-direction: row-reverse;
+}
+
+.galaxy-event-content > * {
+  pointer-events: auto; /* Re-enable for card */
+}
+
+/* Connector line */
+.galaxy-connector {
+  width: 30px;
+  height: 2px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+  flex-shrink: 0;
+}
+
+.left-side .galaxy-connector {
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+}
+
+/* Content Box */
+.galaxy-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  border-radius: 12px;
+  width: 250px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.galaxy-planet-group:hover .galaxy-card {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.galaxy-time {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.galaxy-title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.galaxy-desc {
+  font-size: 0.85rem;
+  color: var(--dim);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.galaxy-rocket-stamp {
+  position: absolute;
+  top: -10px;
+  right: 15px;
+  font-size: 1.5rem;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+  opacity: 0.8;
+}
+
+.left-side .galaxy-rocket-stamp {
+  right: auto;
+  left: 15px;
+}
+
+.galaxy-container {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden; /* Prevent ANY x-scroll */
+  padding-top: 50px;
+  padding-bottom: 40px;
+  background: transparent;
+}
+
+.galaxy-orbits-wrapper {
+  position: relative;
+  width: 100%;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .galaxy-container {
+    padding-top: 80px;
+    padding-bottom: 40px;
+  }
+
+  .galaxy-sun {
+    width: 60px;
+    height: 60px;
+  }
+
+  .galaxy-card {
+    width: 150px !important; /* Even narrower for orbital squeeze */
+    padding: 1rem !important;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+  }
+
+  .galaxy-title {
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .galaxy-desc {
+    font-size: 0.72rem;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2; /* Added for standard compatibility */
+    overflow: hidden;
+  }
+
+  .galaxy-connector {
+    width: 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .galaxy-card {
+    width: 140px !important;
+  }
+  
+  .galaxy-desc {
+    display: none; /* Hide description on very small screens to maintain design */
+  }
+}
