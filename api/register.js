@@ -40,7 +40,7 @@ export default async function handler(req, res) {
     }
   });
 
-  const websiteLink = 'https://instellation-2026.vercel.app';
+  const websiteLink = 'https://instellation.vercel.app';
   const brochureLink = 'https://bit.ly/instellation-2026-brochure';
   const eventDisplayName = eventName || (events && events.length > 0 ? events.join(', ') : 'Your Event');
 
