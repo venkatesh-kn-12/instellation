@@ -9,7 +9,7 @@ export const EV = [
     rules: ['This is an individual event.', 'A maximum of 3 participants per college is allowed.',
       'Allowed programming languages: C, C++, Java, Python.','Pen and paper will be provided if required.','Personal gadgets are strictly prohibited; organizers will provide a PC for the event.','Rules for each round will be announced on the spot.',
        'Plagiarism = instant disqualification', 'The decision of the judges is final and binding'],
-    coords: [{ name: 'AMIR', ph: '+91 84311 92189' }, { name: 'INDUPRIYA', ph: '+91 93809 88559' }]
+    coords: [{ name: 'Ameer', ph: '+91 84311 92189' }, { name: 'Indupriya', ph: '+91 93809 88559' }]
   },
 
   {
@@ -20,7 +20,7 @@ export const EV = [
     desc: 'Design breathtaking interfaces that blend usability with aesthetic elegance. Create your universe on the web canvas and reshape digital experience.',
     prize: '₹3,000', team: '2 Members', fee: '₹300/team',
     rules: ['AI agents are strictly prohibited.', 'Each team must consist of 2 members only.','2 teams per college','Participants must install all required software prior to the event.','Referring to external code is strictly not allowed.','Participants must bring their own laptops, mobile phones, and chargers.' ,'Theme revealed on event day', 'Cumulative scoring will decide the final results', 'Rounds will be based on HTML, CSS, and JavaScript.', 'Participants are allowed to use VS Code editor only.'],
-    coords: [{ name: 'Vamshi Krishna', ph: '+91 79954 90418' }, { name: 'Nidhi Kiran Ankolkar', ph: '+91 88671 42895' }]
+    coords: [{ name: 'Vamshi Krishna', ph: '+91 79954 90418' }, { name: 'Nidhi Kiran Ankolker', ph: '+91 88671 42895' }]
   },
 
   {
@@ -42,7 +42,7 @@ export const EV = [
     desc: 'Test the depths of your technical knowledge in this multi-round quiz odyssey spanning computer science, AI, networking, and the frontiers of current tech.',
     prize: '₹3,000', team: '2 Members', fee: '₹300/team',
     rules: ['Teams of exactly 2 members', '2 teams per college', 'No electronic devices during rounds', 'Quiz master decision is final', 'Fixed time limits.','Topics given on the spot', 'Tie-breakers ready if needed'],
-    coords: [{ name: 'Reeha Anjum', ph: '+91 8073 091 015' }, { name: 'SIVA HARI NAIDU', ph: '+91 77801 26598' }]
+    coords: [{ name: 'Reeha Anjum', ph: '+91 8073 091 015' }, { name: 'Siva Hari Naidu', ph: '+91 77801 26598' }]
   },
 
   {
@@ -63,8 +63,8 @@ export const EV = [
     dtSh: '0 0 80px rgba(50,160,180,.5)', dtRing: false,
     desc: 'Decode cryptic clues scattered across campus. A multi-stage hunt combining technical riddles, coding puzzles, and physical campus exploration.',
     prize: '₹4,000', team: '4 Members', fee: '₹500/team',
-    rules: ['Team of 4 members.', 'Maximum 2 teams per college.', 'No GPS maps permitted during hunt', 'No external help.', 'First team to complete all stages wins','Follow campus rules.','Misconduct leads to disqualification.'],
-    coords: [{ name: 'Mounashree M R', ph: '+91 77952 95343' }, { name: 'Vidya Sagar', ph: '+91 7411 380 028' }]
+    rules: ['Team of 4 members.', 'Maximum 2 teams per college.', 'No GPS maps permitted during hunt', 'No external help.', 'Follow campus rules.','Misconduct leads to disqualification.'],
+    coords: [{ name: 'Mounashree MR', ph: '+91 77952 95343' }, { name: 'Vidya Sagar', ph: '+91 7411 380 028' }]
   },
 
   {
@@ -75,6 +75,6 @@ export const EV = [
     desc: 'Battle it out in the deep cosmic ocean. Only the most tactically elite squads will survive the Cosmic Combat arena and claim victory among the stars.',
     prize: '₹5,000', team: '4 Members (Squad)', fee: '₹500/team',
     rules: ['Team of 4 members.', 'Maximum 2 teams per college.','Custom rooms only.','Players must bring their own charged device', 'Cheating leads to permanent disqualification','No exploiting glitches.'],
-    coords: [{ name: 'CHANDANA N D', ph: '+91 89717 82848' }, { name: 'Vishnu Prasad', ph: '+91 78992 07400' }]
+    coords: [{ name: 'Chandana ND', ph: '+91 89717 82848' }, { name: 'Vishnu Prasad', ph: '+91 78992 07400' }]
   }
 ];

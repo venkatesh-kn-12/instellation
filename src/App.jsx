@@ -14,6 +14,7 @@ import CustomCursor from './components/CustomCursor';
 import Preloader from './components/Preloader';
 import EventDetail from './pages/EventDetail';
 import Hackathon from './pages/Hackathon';
+import HackathonRegistration from './pages/HackathonRegistration';
 
 import './index.css';
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/universe" element={<Universe />} />
           <Route path="/universe/:eventId" element={<EventDetail />} />
           <Route path="/hackathon" element={<Hackathon />} />
+          <Route path="/hackathon/register" element={<HackathonRegistration />} />
 
           <Route path="/about" element={<About />} />
           <Route path="/sponsors" element={<Sponsors />} />
