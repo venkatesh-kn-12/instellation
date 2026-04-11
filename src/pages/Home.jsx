@@ -167,7 +167,7 @@ const Home = () => {
               { icon: FileText, text: 'Detailed event instructions will be provided by the coordinators.' },
               { icon: ShieldAlert, text: 'The college will not be responsible for any loss of personal belongings.' },
               { icon: User, text: 'Individual Events: Maximum 3 participants per college.' },
-              { icon: Users, text: 'Group Events: Maximum 2 teams per college.' },
+              { icon: Users, text: 'Group Events: Maximum 3 teams per college.' },
               { icon: AlertTriangle, text: 'Any malpractice will lead to immediate elimination.' }
             ].map((rule, i) => {
               const IconComponent = rule.icon;

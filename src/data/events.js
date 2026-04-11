@@ -52,7 +52,7 @@ export const EV = [
     dtSh: '0 0 80px rgba(180,150,70,.4)', dtRing: true,
     desc: 'Simulate real-world IT management scenarios. Lead your starfleet through crises, resource allocation, and critical technology decisions under pressure.',
     prize: '₹3,000', team: 'Individual', fee: '₹200/team',
-    rules: ['This is an individual event.','Maximum 3 participants per college.','Participants must bring resume','Business acumen + technical knowledge needed','Smartphones allowed only when instructed.','Rules will be announced on the spot.','Industry panel will cross-question'],
+    rules: ['This is an individual event.','Maximum 3 participants per college.','Participants must bring resume','Business acumen + technical knowledge needed','Smartphones allowed only when instructed.','Rules will be announced on the spot.'],
     coords: [{ name: 'Nethra S', ph: '+91 821 726 5195' }, { name: 'Md Qaiser', ph: '+91 99864 42267' }]
   },
 

@@ -55,7 +55,7 @@ const About = () => {
             <span style={{ color: 'var(--dim2)', fontSize: '0.65rem', letterSpacing: '2px', fontWeight: 600 }}>HOURS LIVE</span>
           </div>
           <div style={{ minWidth: '120px' }}>
-            <h4 style={{ color: 'var(--gold)', fontSize: 'clamp(1.5rem, 5vw, 2.2rem)', marginBottom: '0.2rem' }}>10K+</h4>
+            <h4 style={{ color: 'var(--gold)', fontSize: 'clamp(1.5rem, 5vw, 2.2rem)', marginBottom: '0.2rem' }}>25K+</h4>
             <span style={{ color: 'var(--dim2)', fontSize: '0.65rem', letterSpacing: '2px', fontWeight: 600 }}>PRIZE POOL</span>
           </div>
           <div style={{ minWidth: '120px' }}>
