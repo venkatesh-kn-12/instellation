@@ -122,7 +122,7 @@ const Hero = () => {
                     color: '#fff', 
                     fontWeight: '700', 
                     textShadow: '0 0 15px rgba(255,255,255,0.6)', 
-                    fontSize: 'clamp(0.7rem, 2vw, 1.3rem)',
+                    fontSize: 'clamp(0.68rem, 1.5vw, 1.3rem)',
                     whiteSpace: 'nowrap',
                     letterSpacing: '0.5px'
                   }}>
@@ -131,7 +131,7 @@ const Hero = () => {
                   <span style={{ 
                     color: 'var(--gold)', 
                     fontWeight: '600', 
-                    fontSize: 'clamp(0.6rem, 1.6vw, 1.1rem)',
+                    fontSize: 'clamp(0.75rem, 1.2vw, 1.1rem)',
                     whiteSpace: 'nowrap',
                     letterSpacing: '3px',
                     textTransform: 'uppercase',
