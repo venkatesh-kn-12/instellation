@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  let { name, email, college, phone, events, eventName } = req.body;
+  let { name, email, college, phone, events, eventName, team, department, year, upi, teamMembers } = req.body;
   email = email ? email.trim() : "";
   console.log(`[RECV] Registration attempt: ${name} (${email}) for ${eventName || (events && events.join(','))}`);
 
@@ -103,6 +103,10 @@ export default async function handler(req, res) {
           <tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d;">Email</td><td style="padding: 8px 12px; color: #f0f6fc; border-bottom: 1px solid #21262d;">${email}</td></tr>
           <tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d;">College</td><td style="padding: 8px 12px; color: #f0f6fc; border-bottom: 1px solid #21262d;">${college}</td></tr>
           <tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d;">Phone</td><td style="padding: 8px 12px; color: #f0f6fc; border-bottom: 1px solid #21262d;">${phone}</td></tr>
+          <tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d;">Dept/Year</td><td style="padding: 8px 12px; color: #f0f6fc; border-bottom: 1px solid #21262d;">${department || 'N/A'} (Year ${year || 'N/A'})</td></tr>
+          <tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d;">UPI/UTR</td><td style="padding: 8px 12px; color: #f0f6fc; border-bottom: 1px solid #21262d;">${upi || 'N/A'}</td></tr>
+          <tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d;">Team Name</td><td style="padding: 8px 12px; color: #f0f6fc; border-bottom: 1px solid #21262d;">${team || 'N/A'}</td></tr>
+          ${teamMembers && teamMembers.some(m => m.trim() !== '') ? `<tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d;">Team Members</td><td style="padding: 8px 12px; color: #f0f6fc; border-bottom: 1px solid #21262d;">${teamMembers.filter(m => m.trim() !== '').join(', ')}</td></tr>` : ''}
           <tr><td style="padding: 8px 12px; color: #8b949e;">Event</td><td style="padding: 8px 12px; color: #c9a84c;"><strong>${eventDisplayName}</strong></td></tr>
         </table>
       </div>
@@ -137,7 +141,19 @@ export default async function handler(req, res) {
   if (webhookUrl) {
     try {
       console.log('[SHEET] Attempting webhook...');
-      const sheetData = { name, email, college, phone, events: events ? events.join(', ') : '', eventName: eventDisplayName };
+      const sheetData = { 
+        name, 
+        email, 
+        college, 
+        phone, 
+        events: events ? events.join(', ') : '', 
+        eventName: eventDisplayName,
+        team: team || '',
+        department: department || '',
+        year: year || '',
+        upi: upi || '',
+        teamMembers: teamMembers ? teamMembers.filter(m => m.trim() !== '').join(', ') : ''
+      };
       await fetch(webhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
