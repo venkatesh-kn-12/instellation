@@ -18,7 +18,7 @@ const Hackathon = () => {
     order: 'Day 2 Special',
     dtSh: '0 0 100px rgba(180,50,220,.7)',
     hasSR: true,
-    prize: '₹10,000',
+    prize: '₹4,000',
     team: '2-4 Members',
     fee: '₹500/team',
     date: 'May 7, 2026',
@@ -33,8 +33,8 @@ const Hackathon = () => {
       'Plagiarism or bringing pre-built, complete projects will lead to instant disqualification.'
     ],
     coords: [
-      { name: 'To Be Announced', ph: '+91 00000 00000' },
-      { name: 'To Be Announced', ph: '+91 00000 00000' }
+      { name: 'Akshatha', ph: '+91 9740552962' },
+      { name: 'Shashank S', ph: '+91 9380112063' }
     ]
   };
 
