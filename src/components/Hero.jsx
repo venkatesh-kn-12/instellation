@@ -178,7 +178,7 @@ const Hero = () => {
           <div className="hero-btns" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center', marginTop: '1.2rem', position: 'relative', zIndex: 2 }}>
             <Link to="/universe" className="btn-g btn-p">Explore Events →</Link>
             <Link to="/register" className="btn-g btn-o">Register Now</Link>
-            <button className="btn-g btn-ghost" onClick={() => alert('Brochure PDF downloading...')}>⬇ Brochure</button>
+            <a href="/Brouchure.pdf" download="Brouchure.pdf" className="btn-g btn-ghost">⬇ Brochure</a>
           </div>
         </div>
 
