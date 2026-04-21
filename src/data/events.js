@@ -42,7 +42,7 @@ export const EV = [
     desc: 'Test the depths of your technical knowledge in this multi-round quiz odyssey spanning computer science, AI, networking, and the frontiers of current tech.',
     prize: '₹3,000', team: '2 Members', fee: '₹300/team',
     rules: ['Teams of exactly 2 members', '2 teams per college', 'No electronic devices during rounds', 'Quiz master decision is final', 'Fixed time limits.','Topics given on the spot', 'Tie-breakers ready if needed'],
-    coords: [{ name: 'Reeha Anjum', ph: '+91 8073 091 015' }, { name: 'Siva Hari Naidu', ph: '+91 77801 26598' }]
+    coords: [{ name: 'Reeha Anjum', ph: '+91 8073 091 015' }, { name: 'Nagaraj', ph: '+91 8867180744' }]
   },
 
   {
@@ -64,7 +64,7 @@ export const EV = [
     desc: 'Decode cryptic clues scattered across campus. A multi-stage hunt combining technical riddles, coding puzzles, and physical campus exploration.',
     prize: '₹4,000', team: '4 Members', fee: '₹500/team',
     rules: ['Team of 4 members.', 'Maximum 2 teams per college.', 'No GPS maps permitted during hunt', 'No external help.', 'Follow campus rules.','Misconduct leads to disqualification.'],
-    coords: [{ name: 'Mounashree MR', ph: '+91 77952 95343' }, { name: 'Vidya Sagar', ph: '+91 7411 380 028' }]
+    coords: [{ name: ' Vidhya', ph: '+91 7483846564' }, { name: 'Manoj', ph: '+918971128227' }]
   },
 
   {
