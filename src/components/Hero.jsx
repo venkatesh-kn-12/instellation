@@ -162,7 +162,7 @@ const Hero = () => {
             <div className="hm-item"><div className="hm-l">Venue</div><div className="hm-v">DSATM - M Block, Kanakapura Road Bengaluru</div></div>
             <div className="hm-item"><div className="hm-l">Date</div><div className="hm-v">May 6, 2026</div></div>
             <div className="hm-item"><div className="hm-l">Events</div><div className="hm-v">7 Planets</div></div>
-            <div className="hm-item"><div className="hm-l">Prize Pool</div><div class="hm-v">₹25,000+</div></div>
+            <div className="hm-item"><div className="hm-l">Prize Pool</div><div class="hm-v">₹29,000+</div></div>
           </div>
 
           <div className="countdown">
