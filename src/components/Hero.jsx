@@ -83,11 +83,11 @@ const Hero = () => {
             <div className="banner-accent-line l-accent"></div>
 
             {/* Logo */}
-            <div className="banner-logo-wrap" style={{ 
-              position: 'relative', 
-              width: 'clamp(60px, 15vw, 130px)', 
-              height: 'clamp(60px, 15vw, 130px)', 
-              flexShrink: 0 
+            <div className="banner-logo-wrap" style={{
+              position: 'relative',
+              width: 'clamp(60px, 15vw, 130px)',
+              height: 'clamp(60px, 15vw, 130px)',
+              flexShrink: 0
             }}>
               <img src={logoImg} alt="DSATM Logo" style={{ width: '100%', height: '100%', objectFit: 'contain', position: 'relative', zIndex: 1, filter: 'drop-shadow(0 0 35px rgba(201, 168, 76, 0.6)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.3))' }} />
             </div>
@@ -118,19 +118,19 @@ const Hero = () => {
               <div className="banner-subtitle" style={{ gap: 'clamp(0.4rem, 2vw, 1.5rem)', flexWrap: 'nowrap', alignItems: 'center' }}>
                 <div className="banner-subtitle-line" style={{ width: 'clamp(10px, 5vw, 50px)', background: 'linear-gradient(90deg, transparent, var(--gold))' }}></div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1.4' }}>
-                  <span style={{ 
-                    color: '#fff', 
-                    fontWeight: '700', 
-                    textShadow: '0 0 15px rgba(255,255,255,0.6)', 
+                  <span style={{
+                    color: '#fff',
+                    fontWeight: '700',
+                    textShadow: '0 0 15px rgba(255,255,255,0.6)',
                     fontSize: 'clamp(0.68rem, 1.5vw, 1.3rem)',
                     whiteSpace: 'nowrap',
                     letterSpacing: '0.5px'
                   }}>
                     Department of Master of Computer Application
                   </span>
-                  <span style={{ 
-                    color: 'var(--gold)', 
-                    fontWeight: '600', 
+                  <span style={{
+                    color: 'var(--gold)',
+                    fontWeight: '600',
                     fontSize: 'clamp(0.75rem, 1.2vw, 1.1rem)',
                     whiteSpace: 'nowrap',
                     letterSpacing: '3px',
@@ -178,7 +178,20 @@ const Hero = () => {
           <div className="hero-btns" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center', marginTop: '1.2rem', position: 'relative', zIndex: 2 }}>
             <Link to="/universe" className="btn-g btn-p">Explore Events →</Link>
             <Link to="/register" className="btn-g btn-o">Register Now</Link>
-            <a href="/Brouchure.pdf" download="Brouchure.pdf" className="btn-g btn-ghost">⬇ Brochure</a>
+            <a
+              href="/INSTELLATION BROUCHER.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => {
+                const link = document.createElement('a');
+                link.href = "/INSTELLATION BROUCHER.pdf";
+                link.download = "INSTELLATION BROUCHER.pdf";
+                link.click();
+              }}
+              className="btn-g btn-ghost"
+            >
+              ⬇ Brochure
+            </a>
           </div>
         </div>
 
