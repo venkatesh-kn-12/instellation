@@ -3,14 +3,14 @@ import { motion } from 'framer-motion';
 
 const Sponsors = () => {
   return (
-    <div className="page-wrapper" style={{ 
-      paddingLeft: '1rem', 
+    <div className="page-wrapper" style={{
+      paddingLeft: '1rem',
       paddingRight: '1rem',
-      display: 'flex', 
-      flexDirection: 'column', 
-      alignItems: 'center' 
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
     }}>
-      <motion.h1 
+      <motion.h1
         initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
         style={{ fontSize: 'clamp(2rem, 8vw, 3.2rem)', letterSpacing: 'clamp(4px, 2vw, 8px)', color: '#fff', textAlign: 'center', marginBottom: '1rem' }}
       >
@@ -21,24 +21,24 @@ const Sponsors = () => {
       </p>
 
       {/* Tier 1 */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
         style={{ width: '100%', maxWidth: '800px', marginBottom: '5rem' }}
       >
         <h3 style={{ color: 'var(--gold)', textAlign: 'center', letterSpacing: '4px', marginBottom: '2.5rem', fontSize: '0.9rem', fontWeight: '400' }}>TITLE SPONSOR</h3>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <div style={{ 
-            width: 'clamp(200px, 80%, 340px)', 
-            height: 'clamp(100px, 20vh, 160px)', 
-            background: 'rgba(201, 168, 76, 0.05)', 
-            border: '1px solid var(--gold)', 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            fontSize: 'clamp(1.5rem, 6vw, 2.8rem)', 
-            color: '#fff', 
-            fontWeight: '800', 
-            letterSpacing: '4px', 
+          <div style={{
+            width: 'clamp(200px, 80%, 340px)',
+            height: 'clamp(100px, 20vh, 160px)',
+            background: 'rgba(201, 168, 76, 0.05)',
+            border: '1px solid var(--gold)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 'clamp(1.5rem, 6vw, 2.8rem)',
+            color: '#fff',
+            fontWeight: '800',
+            letterSpacing: '4px',
             boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
             borderRadius: '4px'
           }}>
@@ -48,32 +48,49 @@ const Sponsors = () => {
       </motion.div>
 
       {/* Tier 2 */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
         style={{ width: '100%', maxWidth: '1000px' }}
       >
         <h3 style={{ color: 'var(--dim2)', textAlign: 'center', letterSpacing: '4px', marginBottom: '2.5rem', fontSize: '0.8rem', fontWeight: '400' }}>NEBULA PARTNERS</h3>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
-          {[ 'CYBER DYNAMICS', 'QUANTUM LABS', 'NEXUS AI' ].map((partner) => (
-            <div key={partner} style={{ 
-              width: 'clamp(140px, 45%, 220px)', 
-              height: '100px', 
-              background: 'rgba(255, 255, 255, 0.02)', 
-              border: '1px solid rgba(255,255,255,0.08)', 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center', 
-              fontSize: '0.75rem', 
-              color: 'var(--dim)', 
+          {[
+            { name: 'MASTER VLSI', img: '/mastervlsi.png' },
+            { name: 'QUANTUM LABS' },
+            { name: 'NEXUS AI' }
+          ].map((partner) => (
+            <div key={partner.name || partner} style={{
+              width: 'clamp(140px, 45%, 220px)',
+              minHeight: '110px',
+              background: 'rgba(255, 255, 255, 0.02)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '0.75rem',
+              color: 'var(--dim)',
               letterSpacing: '1.5px',
               textAlign: 'center',
               padding: '1rem',
               borderRadius: '4px'
             }}>
-              {partner}
+              {partner.img ? (
+                <>
+                  <img
+                    src={partner.img}
+                    alt={partner.name}
+                    style={{ width: '100%', height: '70px', objectFit: 'contain', marginBottom: '8px' }}
+                  />
+                  <span style={{ fontWeight: 600, color: '#fff' }}>{partner.name}</span>
+                </>
+              ) : (
+                partner.name || partner
+              )}
             </div>
           ))}
         </div>
+
       </motion.div>
     </div>
   );

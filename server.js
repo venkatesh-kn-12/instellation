@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail', 
+  service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
@@ -28,8 +28,8 @@ app.post('/api/register', async (req, res) => {
     return res.status(400).json({ error: 'Name and email are required.' });
   }
 
-  const websiteLink = 'https://instellation.vercel.app/'; 
-  const brochureLink = 'https://bit.ly/instellation-2026-brochure'; 
+  const websiteLink = 'https://instellation.vercel.app/';
+  const brochureLink = `${websiteLink}INSTELLATION BROUCHER.pdf`;
   const eventDisplayName = eventName || (events && events.length > 0 ? events.join(', ') : 'Your Event');
 
   // --- STUDENT EMAIL OPTIONS ---
