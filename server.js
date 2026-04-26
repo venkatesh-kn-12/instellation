@@ -19,9 +19,10 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post('/api/register', async (req, res) => {
-  let { name, email, college, phone, events, eventName, team, year, department, upi } = req.body;
+  let { name, email, college, phone, events, eventName, team, year, department, upi, teamMembers } = req.body;
   email = email ? email.trim() : "";
-  console.log(`[RECV] Registration attempt: ${name} (${email}) for ${eventName || events.join(',')}`);
+  const eventNameLog = eventName || (events && events.length > 0 ? events.join(',') : 'Unknown');
+  console.log(`[RECV] Registration attempt: ${name} (${email}) for ${eventNameLog}`);
 
   if (!name || !email) {
     console.log('[WARN] Missing name or email');
@@ -82,14 +83,22 @@ app.post('/api/register', async (req, res) => {
     from: process.env.EMAIL_USER,
     to: process.env.EMAIL_USER,
     replyTo: email,
-    subject: `New Registration: ${name}`,
+    subject: `New Registration: ${name} — ${eventDisplayName}`,
     html: `
-      <h2>New Cadet Registered!</h2>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>College:</strong> ${college}</p>
-      <p><strong>Phone:</strong> ${phone}</p>
-      <p><strong>Event:</strong> ${eventDisplayName}</p>
+      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 30px; background: #0d1117; color: #c9d1d9; border: 1px solid #30363d; border-radius: 8px;">
+        <h2 style="color: #c9a84c; margin-top: 0;">🚀 New Cadet Registered!</h2>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+          <tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d;">Name</td><td style="padding: 8px 12px; color: #f0f6fc; border-bottom: 1px solid #21262d;"><strong>${name}</strong></td></tr>
+          <tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d;">Email</td><td style="padding: 8px 12px; color: #f0f6fc; border-bottom: 1px solid #21262d;">${email}</td></tr>
+          <tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d;">College</td><td style="padding: 8px 12px; color: #f0f6fc; border-bottom: 1px solid #21262d;">${college}</td></tr>
+          <tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d;">Phone</td><td style="padding: 8px 12px; color: #f0f6fc; border-bottom: 1px solid #21262d;">${phone}</td></tr>
+          <tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d;">Year/Dept</td><td style="padding: 8px 12px; color: #f0f6fc; border-bottom: 1px solid #21262d;">${year} / ${department}</td></tr>
+          <tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d;">Event</td><td style="padding: 8px 12px; color: #c9a84c;"><strong>${eventDisplayName}</strong></td></tr>
+          <tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d;">Team Name</td><td style="padding: 8px 12px; color: #f0f6fc; border-bottom: 1px solid #21262d;">${team || 'N/A'}</td></tr>
+          ${teamMembers && teamMembers.length > 0 ? `<tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d;">Team Members</td><td style="padding: 8px 12px; color: #f0f6fc; border-bottom: 1px solid #21262d;">${teamMembers.filter(m => m.trim() !== '').join(', ')}</td></tr>` : ''}
+          <tr><td style="padding: 8px 12px; color: #8b949e;">UTR ID</td><td style="padding: 8px 12px; color: #f0f6fc;"><code>${upi}</code></td></tr>
+        </table>
+      </div>
     `
   };
 
@@ -121,9 +130,10 @@ app.post('/api/register', async (req, res) => {
         email,
         college,
         phone,
-        events: events.join(', '),
+        events: events ? events.join(', ') : '',
         eventName,
         team: team || 'N/A',
+        teamMembers: teamMembers ? teamMembers.filter(m => m.trim() !== '').join(', ') : 'None',
         year,
         department,
         upi
@@ -157,14 +167,19 @@ app.post('/api/contact', async (req, res) => {
     replyTo: email,
     subject: `New Contact Query: ${name} — Instellation 2026`,
     html: `
-      <h2>🚀 Incoming Transmission Received!</h2>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Phone:</strong> ${phone || 'N/A'}</p>
-      <p><strong>College:</strong> ${college || 'N/A'}</p>
-      <hr />
-      <h3>Message Payload:</h3>
-      <p style="white-space: pre-wrap;">${message}</p>
+      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 30px; background: #0d1117; color: #c9d1d9; border: 1px solid #30363d; border-radius: 8px;">
+        <h2 style="color: #c9a84c; margin-top: 0;">🛰️ Incoming Transmission Received!</h2>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+          <tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d; width: 120px;">Name</td><td style="padding: 8px 12px; color: #f0f6fc; border-bottom: 1px solid #21262d;"><strong>${name}</strong></td></tr>
+          <tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d;">Email</td><td style="padding: 8px 12px; color: #f0f6fc; border-bottom: 1px solid #21262d;"><a href="mailto:${email}" style="color: #58a6ff;">${email}</a></td></tr>
+          <tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d;">Phone</td><td style="padding: 8px 12px; color: #f0f6fc; border-bottom: 1px solid #21262d;">${phone || 'N/A'}</td></tr>
+          <tr><td style="padding: 8px 12px; color: #8b949e; border-bottom: 1px solid #21262d;">College</td><td style="padding: 8px 12px; color: #f0f6fc; border-bottom: 1px solid #21262d;">${college || 'N/A'}</td></tr>
+        </table>
+        <div style="margin-top: 25px; padding: 20px; background: rgba(2, 4, 8, 0.6); border-left: 3px solid #c9a84c; border-radius: 4px;">
+          <h3 style="margin-top: 0; color: #8b949e; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Message Payload:</h3>
+          <p style="color: #f0f6fc; line-height: 1.6; white-space: pre-wrap; margin-bottom: 0;">${message}</p>
+        </div>
+      </div>
     `
   };
 
@@ -179,3 +194,5 @@ app.post('/api/contact', async (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Backend server listening at http://localhost:${PORT}`));
+
+export default app;

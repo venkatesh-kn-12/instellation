@@ -1,14 +1,11 @@
 {
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/((?!api/).*)", "destination": "/" }
-  ],
   "functions": {
-    "api/register.js": {
-      "maxDuration": 30
-    },
-    "api/contact.js": {
+    "server.js": {
       "maxDuration": 30
     }
-  }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/server.js" },
+    { "source": "/((?!api/).*)", "destination": "/" }
+  ]
 }
