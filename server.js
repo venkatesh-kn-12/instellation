@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post('/api/register', async (req, res) => {
-  let { name, email, college, phone, events, eventName } = req.body;
+  let { name, email, college, phone, events, eventName, team, year, department, upi } = req.body;
   email = email ? email.trim() : "";
   console.log(`[RECV] Registration attempt: ${name} (${email}) for ${eventName || events.join(',')}`);
 
@@ -116,7 +116,18 @@ app.post('/api/register', async (req, res) => {
   if (webhookUrl) {
     try {
       console.log('[SHEET] Attempting webhook...');
-      const sheetData = { name, email, college, phone, events: events.join(', '), eventName: eventDisplayName };
+      const sheetData = {
+        name,
+        email,
+        college,
+        phone,
+        events: events.join(', '),
+        eventName,
+        team: team || 'N/A',
+        year,
+        department,
+        upi
+      };
       await fetch(webhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
