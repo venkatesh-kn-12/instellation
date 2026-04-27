@@ -25,7 +25,7 @@ const Sponsors = () => {
         initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
         style={{ width: '100%', maxWidth: '800px', marginBottom: '5rem' }}
       >
-        <h3 style={{ color: 'var(--gold)', textAlign: 'center', letterSpacing: '4px', marginBottom: '2.5rem', fontSize: '0.9rem', fontWeight: '400' }}>TITLE SPONSOR</h3>
+        <h3 style={{ color: 'var(--gold)', textAlign: 'center', letterSpacing: '4px', marginBottom: '2.5rem', fontSize: '0.9rem', fontWeight: '400' }}>ASSOCIATE SPONSOR</h3>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <div style={{
             width: 'clamp(200px, 80%, 340px)',
@@ -42,7 +42,7 @@ const Sponsors = () => {
             boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
             borderRadius: '4px'
           }}>
-            AMD
+            { name: 'MASTER VLSI', img: '/mastervlsi.png' }
           </div>
         </div>
       </motion.div>
