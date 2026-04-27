@@ -214,7 +214,7 @@ const HackathonRegistration = () => {
                 </div>
                 <div className="upi-box">
                   <span className="upi-l">UPI ID</span>
-                  <div className="upi-id">6360215241@kotak811</div>
+                  <div className="upi-id">Shanky1464@upi</div>
                 </div>
                 <p className="pay-note">Scan QR or use UPI ID to pay. Enter the UTR number in the form field.</p>
                 <div style={{ marginTop:'1rem', padding:'.75rem', background:'rgba(7,18,40,.5)', borderRadius:'6px', fontSize:'.7rem', color:'var(--dim)', lineHeight:2, border:'1px solid rgba(201,168,76,.1)' }}>
