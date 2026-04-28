@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-
 const Sponsors = () => {
   return (
     <div className="page-wrapper" style={{
@@ -20,8 +19,8 @@ const Sponsors = () => {
         SUPPORTING THE FRONTIER OF TECHNOLOGY
       </p>
 
-      {/* Tier 1 */}
-      <motion.div
+      {/* Tier 1 - Associate Sponsor (temporarily hidden) */}
+      {/* <motion.div
         initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
         style={{ width: '100%', maxWidth: '800px', marginBottom: '5rem' }}
       >
@@ -42,17 +41,17 @@ const Sponsors = () => {
             boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
             borderRadius: '4px'
           }}>
-            { name: 'MASTER VLSI', img: '/mastervlsi.png' }
+            amd
           </div>
         </div>
-      </motion.div>
+      </motion.div> */}
 
       {/* Tier 2 */}
       <motion.div
         initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
         style={{ width: '100%', maxWidth: '1000px' }}
       >
-        <h3 style={{ color: 'var(--dim2)', textAlign: 'center', letterSpacing: '4px', marginBottom: '2.5rem', fontSize: '0.8rem', fontWeight: '400' }}>NEBULA PARTNERS</h3>
+        <h3 style={{ color: 'var(--dim2)', textAlign: 'center', letterSpacing: '4px', marginBottom: '2.5rem', fontSize: '0.8rem', fontWeight: '400' }}>ASSOCIATE SPONSOR</h3>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
           {[
             { name: 'MASTER VLSI', img: '/mastervlsi.png' },
@@ -90,10 +89,8 @@ const Sponsors = () => {
             </div>
           ))}
         </div>
-
       </motion.div>
     </div>
   );
 };
-
 export default Sponsors;
