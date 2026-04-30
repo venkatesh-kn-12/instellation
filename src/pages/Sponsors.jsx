@@ -94,8 +94,6 @@ const Sponsors = () => {
         <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
           {[
             { name: 'MASTER VLSI', img: '/mastervlsi.png' },
-            { name: 'QUANTUM LABS' },
-            { name: 'NEXUS AI' }
           ].map((partner) => (
             <div key={partner.name || partner} style={{
               width: 'clamp(140px, 45%, 220px)',
