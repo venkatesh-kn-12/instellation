@@ -7,8 +7,8 @@ export const EV = [
     desc: 'Race against time to crack complex algorithms and machine logic. Speed meets intelligence in this high-velocity coding arena where only the fastest minds prevail.',
     prize: '₹4,000', team: 'Individual', fee: '₹200/team',
     rules: ['This is an individual event.', 'A maximum of 3 participants per college is allowed.',
-      'Allowed programming languages: C, C++, Java, Python.','Pen and paper will be provided if required.','Personal gadgets are strictly prohibited; organizers will provide a PC for the event.','Rules for each round will be announced on the spot.',
-       'Plagiarism = instant disqualification', 'The decision of the judges is final and binding'],
+      'Allowed programming languages: C, C++, Java, Python.', 'Pen and paper will be provided if required.', 'Personal gadgets are strictly prohibited; organizers will provide a PC for the event.', 'Rules for each round will be announced on the spot.',
+      'Plagiarism = instant disqualification', 'The decision of the judges is final and binding'],
     coords: [{ name: 'Ameer', ph: '+91 84311 92189' }, { name: 'Indupriya', ph: '+91 93809 88559' }]
   },
 
@@ -19,7 +19,7 @@ export const EV = [
     dtSh: '0 0 80px rgba(30,144,100,.5)', dtRing: false,
     desc: 'Design breathtaking interfaces that blend usability with aesthetic elegance. Create your universe on the web canvas and reshape digital experience.',
     prize: '₹3,000', team: '2 Members', fee: '₹300/team',
-    rules: ['AI agents are strictly prohibited.', 'Each team must consist of 2 members only.','2 teams per college','Participants must install all required software prior to the event.','Referring to external code is strictly not allowed.','Participants must bring their own laptops, mobile phones, and chargers.' ,'Theme revealed on event day', 'Cumulative scoring will decide the final results', 'Rounds will be based on HTML, CSS, and JavaScript.', 'Participants are allowed to use VS Code editor only.'],
+    rules: ['AI agents are strictly prohibited.', 'Each team must consist of 2 members only.', '2 teams per college', 'Participants must install all required software prior to the event.', 'Referring to external code is strictly not allowed.', 'Participants must bring their own laptops, mobile phones, and chargers.', 'Theme revealed on event day', 'Cumulative scoring will decide the final results', 'Rounds will be based on HTML, CSS, and JavaScript.', 'Participants are allowed to use VS Code editor only.'],
     coords: [{ name: 'Vamshi Krishna', ph: '+91 79954 90418' }, { name: 'Nidhi Kiran Ankolker', ph: '+91 88671 42895' }]
   },
 
@@ -30,7 +30,7 @@ export const EV = [
     dtSh: '0 0 80px rgba(180,60,20,.6)', dtRing: false,
     desc: 'Wield your lens across campus and frame the extraordinary within the ordinary. The red planet awaits the bold vision of a stellar photographer.',
     prize: '₹3,000', team: 'Individual', fee: '₹200',
-    rules: ['This is an individual event.','Shooting zone: DSATM Campus only', 'Maximum 3 participants per college.', 'Photography must be done using mobile phones only.', 'Cameras are NOT allowed.', 'Editing must be done on the spot','Original content only.','RAW files may be requested for verification'],
+    rules: ['This is an individual event.', 'Shooting zone: DSATM Campus only', 'Maximum 3 participants per college.', 'Photography must be done using mobile phones only.', 'Cameras are NOT allowed.', 'Editing must be done on the spot', 'Original content only.', 'RAW files may be requested for verification'],
     coords: [{ name: 'Rakshitha Umesh', ph: '+91 93539 29365' }, { name: 'Shashank Bharadwaj S', ph: '+91 93801 12063' }]
   },
 
@@ -41,7 +41,7 @@ export const EV = [
     dtSh: '0 0 80px rgba(180,100,30,.5)', dtRing: false,
     desc: 'Test the depths of your technical knowledge in this multi-round quiz odyssey spanning computer science, AI, networking, and the frontiers of current tech.',
     prize: '₹3,000', team: '2 Members', fee: '₹300/team',
-    rules: ['Teams of exactly 2 members', '2 teams per college', 'No electronic devices during rounds', 'Quiz master decision is final', 'Fixed time limits.','Topics given on the spot', 'Tie-breakers ready if needed'],
+    rules: ['Teams of exactly 2 members', '2 teams per college', 'No electronic devices during rounds', 'Quiz master decision is final', 'Fixed time limits.', 'Topics given on the spot', 'Tie-breakers ready if needed'],
     coords: [{ name: 'Reeha Anjum', ph: '+91 8073 091 015' }, { name: 'Nagaraj', ph: '+91 8867180744' }]
   },
 
@@ -52,7 +52,7 @@ export const EV = [
     dtSh: '0 0 80px rgba(180,150,70,.4)', dtRing: true,
     desc: 'Simulate real-world IT management scenarios. Lead your starfleet through crises, resource allocation, and critical technology decisions under pressure.',
     prize: '₹3,000', team: 'Individual', fee: '₹200/team',
-    rules: ['This is an individual event.','Maximum 3 participants per college.','Participants must bring resume','Business acumen + technical knowledge needed','Smartphones allowed only when instructed.','Rules will be announced on the spot.'],
+    rules: ['This is an individual event.', 'Maximum 3 participants per college.', 'Participants must bring resume', 'Business acumen + technical knowledge needed', 'Smartphones allowed only when instructed.', 'Rules will be announced on the spot.'],
     coords: [{ name: 'Nethra S', ph: '+91 821 726 5195' }, { name: 'Md Qaiser', ph: '+91 99864 42267' }]
   },
 
@@ -63,7 +63,7 @@ export const EV = [
     dtSh: '0 0 80px rgba(50,160,180,.5)', dtRing: false,
     desc: 'Decode cryptic clues scattered across campus. A multi-stage hunt combining technical riddles, coding puzzles, and physical campus exploration.',
     prize: '₹4,000', team: '4 Members', fee: '₹500/team',
-    rules: ['Team of 4 members.', 'Maximum 2 teams per college.', 'No GPS maps permitted during hunt', 'No external help.', 'Follow campus rules.','Misconduct leads to disqualification.'],
+    rules: ['Team of 4 members.', 'Maximum 2 teams per college.', 'No GPS maps permitted during hunt', 'No external help.', 'Follow campus rules.', 'Misconduct leads to disqualification.'],
     coords: [{ name: ' Vidhya', ph: '+91 7483846564' }, { name: 'Manoj', ph: '+918971128227' }]
   },
 
@@ -73,8 +73,8 @@ export const EV = [
     cpg: '0 0 28px rgba(40,100,200,.55)', cpgh: '0 0 58px rgba(60,140,220,.8)', hasSR: false,
     dtSh: '0 0 80px rgba(40,100,200,.55)', dtRing: false,
     desc: 'Battle it out in the deep cosmic ocean. Only the most tactically elite squads will survive the Cosmic Combat arena and claim victory among the stars.',
-    prize: '₹5,000', team: '4 Members (Squad)', fee: '₹500/team',
-    rules: ['Team of 4 members.', 'Maximum 2 teams per college.','Custom rooms only.','Players must bring their own charged device', 'Cheating leads to permanent disqualification','No exploiting glitches.'],
+    prize: '₹5,000', team: '4 Members (Squad)', fee: '₹300/team',
+    rules: ['Team of 4 members.', 'Maximum 2 teams per college.', 'Custom rooms only.', 'Players must bring their own charged device', 'Cheating leads to permanent disqualification', 'No exploiting glitches.'],
     coords: [{ name: 'Chandana ND', ph: '+91 89717 82848' }, { name: 'Vishnu Prasad', ph: '+91 78992 07400' }]
   }
 ];
