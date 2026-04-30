@@ -156,6 +156,22 @@ const Hero = () => {
             </div>
             <div className="title-shimmer"></div>
           </div>
+          {/* TITLE SPONSORS ON HERO */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '1.5rem', marginBottom: '1.5rem', zIndex: 5 }}>
+            <span style={{ color: 'var(--gold)', fontSize: '0.75rem', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '1rem', fontWeight: '600' }}>Powered by </span>
+            <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
+
+              <div style={{ background: 'rgba(255,255,255,0.03)', padding: '10px 15px', borderRadius: '12px', border: '1px solid rgba(201,168,76,0.3)', width: 'clamp(120px, 20vw, 160px)', height: '70px', display: 'flex', justifyContent: 'center', alignItems: 'center', backdropFilter: 'blur(4px)' }}>
+                <img src="/brahma3.jpeg" alt="Brahma 3" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+              </div>
+
+              <div style={{ background: 'rgba(255,255,255,0.03)', padding: '10px 15px', borderRadius: '12px', border: '1px solid rgba(201,168,76,0.3)', width: 'clamp(120px, 20vw, 160px)', height: '70px', display: 'flex', justifyContent: 'center', alignItems: 'center', backdropFilter: 'blur(4px)' }}>
+                <img src="/li2edu.jpeg" alt="Li2Edu" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+              </div>
+
+            </div>
+          </div>
+
           <p className="hero-tagline">Navigate the Technical Universe &nbsp;·&nbsp; May 6-7, 2026</p>
 
           <div className="hero-meta">
