@@ -18,6 +18,45 @@ const Sponsors = () => {
       <p style={{ color: 'var(--dim)', marginBottom: '4rem', letterSpacing: '2px', fontSize: '0.75rem', textAlign: 'center' }}>
         SUPPORTING THE FRONTIER OF TECHNOLOGY
       </p>
+      {/* TITLE SPONSORS */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+        style={{ width: '100%', maxWidth: '800px', marginBottom: '5rem' }}
+      >
+        <h3 style={{ color: 'var(--gold)', textAlign: 'center', letterSpacing: '4px', marginBottom: '2.5rem', fontSize: '1rem', fontWeight: '600' }}>TITLE SPONSORS</h3>
+
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap' }}>
+          {[
+            { name: 'BRAHMA 3', img: '/brahma3.jpeg' },
+            { name: 'LI2EDU', img: '/li2edu.jpeg' }
+          ].map((partner) => (
+            <div key={partner.name} style={{
+              width: 'clamp(200px, 40%, 300px)',
+              minHeight: '140px',
+              background: 'rgba(201, 168, 76, 0.05)',
+              border: '1px solid var(--gold)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '1rem',
+              color: '#fff',
+              letterSpacing: '2px',
+              textAlign: 'center',
+              padding: '1.5rem',
+              borderRadius: '8px',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
+            }}>
+              <img
+                src={partner.img}
+                alt={partner.name}
+                style={{ width: '100%', height: '90px', objectFit: 'contain', marginBottom: '12px' }}
+              />
+              <span style={{ fontWeight: 700, color: '#fff' }}>{partner.name}</span>
+            </div>
+          ))}
+        </div>
+      </motion.div>
 
       {/* Tier 1 - Associate Sponsor (temporarily hidden) */}
       {/* <motion.div
