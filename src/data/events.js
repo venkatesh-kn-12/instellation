@@ -19,7 +19,7 @@ export const EV = [
     dtSh: '0 0 80px rgba(30,144,100,.5)', dtRing: false,
     desc: 'Design breathtaking interfaces that blend usability with aesthetic elegance. Create your universe on the web canvas and reshape digital experience.',
     prize: '₹3,000', team: '2 Members', fee: '₹300/team',
-    rules: ['AI agents are strictly prohibited.', 'Each team must consist of 2 members only.', '2 teams per college', 'Participants must install all required software prior to the event.', 'Referring to external code is strictly not allowed.', 'Participants must bring their own laptops, mobile phones, and chargers.', 'Theme revealed on event day', 'Cumulative scoring will decide the final results', 'Rounds will be based on HTML, CSS, and JavaScript.', 'Participants are allowed to use VS Code editor only.'],
+    rules: ['Each team must consist of 2 members only.', 'A maximum of 2 teams per college is allowed.', 'Participants must install all required software prior to the event.', 'Referring to external code is strictly not allowed.', 'Participants must bring their own laptops, mobile phones, and chargers.', 'The theme will be revealed on the event day.', 'Cumulative scoring will decide the final results', 'Rounds will be based on HTML, CSS, and JavaScript.', 'Participants are allowed to use VS Code editor only.', 'Participants must have basic knowledge of Figma.'],
     coords: [{ name: 'Vamshi Krishna', ph: '+91 79954 90418' }, { name: 'Nidhi Kiran Ankolker', ph: '+91 88671 42895' }]
   },
 
