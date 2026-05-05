@@ -87,9 +87,12 @@ const Hackathon = () => {
 
         <div style={{ textAlign: 'center', marginTop: '3.5rem', paddingTop: '2.5rem', borderTop: '1px solid var(--border)' }}>
           <p style={{ color: 'var(--dim)', fontSize: '.82rem', marginBottom: '1.5rem' }}>Ready to embark on this 6-hour mission?</p>
-          <Link to="/hackathon/register" className="btn-g btn-p" style={{ padding: '.9rem 3rem' }}>
+          {/* <Link to="/hackathon/register" className="btn-g btn-p" style={{ padding: '.9rem 3rem' }}>
             Register for {e.name} →
-          </Link>
+          </Link> */}
+          <p style={{ color: 'red', fontSize: '1.2rem', fontWeight: 600, marginBottom: '1.5rem' }}>
+            Registrations are Closed
+          </p>
         </div>
       </div>
     </div>
