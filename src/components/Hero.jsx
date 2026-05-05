@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logoImg from '../assets/image.png';
 import './Hero.css';
@@ -169,6 +169,14 @@ const Hero = () => {
                 <img src="/li2edu.jpeg" alt="Li2Edu" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
               </div>
 
+            </div>
+
+            {/* CO-POWERED BY */}
+            <span style={{ color: 'var(--gold)', fontSize: '0.75rem', letterSpacing: '4px', textTransform: 'uppercase', marginTop: '1.2rem', marginBottom: '1rem', fontWeight: '600' }}>Co Powered by</span>
+            <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <div style={{ background: 'rgba(255,255,255,0.03)', padding: '10px 15px', borderRadius: '12px', border: '1px solid rgba(201,168,76,0.3)', width: 'clamp(120px, 20vw, 160px)', height: '70px', display: 'flex', justifyContent: 'center', alignItems: 'center', backdropFilter: 'blur(4px)' }}>
+                <img src="/mastervlsi.png" alt="MasterVLSI" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+              </div>
             </div>
           </div>
 
