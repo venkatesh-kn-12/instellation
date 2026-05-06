@@ -32,7 +32,7 @@ const Registration = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // UTR Validation: exactly 12 digits
     const utrRegex = /^\d{12}$/;
     if (!utrRegex.test(formData.upi)) {
@@ -64,27 +64,27 @@ const Registration = () => {
   return (
     <div className="page-wrapper">
       <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2.5rem)' }}>
-        
+
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <span style={{ fontFamily:'var(--font-heading)', fontSize:'.64rem', letterSpacing:'5px', color:'var(--gold)', textTransform:'uppercase', marginBottom:'.8rem', display:'block' }}>
+          <span style={{ fontFamily: 'var(--font-heading)', fontSize: '.64rem', letterSpacing: '5px', color: 'var(--gold)', textTransform: 'uppercase', marginBottom: '.8rem', display: 'block' }}>
             Begin Your Mission
           </span>
-          <h2 style={{ fontFamily:'var(--font-heading)', fontSize:'clamp(1.9rem,4vw,3rem)', fontWeight:700, color:'var(--white)', lineHeight:1.1 }}>
-            Mission <em style={{ color:'transparent', WebkitTextStroke:'1px var(--gold)', fontStyle:'normal' }}>Registration</em>
+          <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.9rem,4vw,3rem)', fontWeight: 700, color: 'var(--white)', lineHeight: 1.1 }}>
+            Mission <em style={{ color: 'transparent', WebkitTextStroke: '1px var(--gold)', fontStyle: 'normal' }}>Registration</em>
           </h2>
-          <p style={{ color:'var(--dim)', marginTop:'.9rem', fontSize:'.9rem', lineHeight:1.85, fontWeight:300, maxWidth:580, margin:'0 auto' }}>
+          <p style={{ color: 'var(--dim)', marginTop: '.9rem', fontSize: '.9rem', lineHeight: 1.85, fontWeight: 300, maxWidth: 580, margin: '0 auto' }}>
             Complete your registration sequence to secure your coordinates in the Instellation galaxy.
           </p>
-          <div style={{ width:'1px', height:'55px', background:'linear-gradient(180deg,var(--gold),transparent)', margin:'1.5rem auto 0' }}></div>
+          <div style={{ width: '1px', height: '55px', background: 'linear-gradient(180deg,var(--gold),transparent)', margin: '1.5rem auto 0' }}></div>
         </div>
 
-        <motion.div 
+        <motion.div
           className="reg-wrap"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="reg-grid">
+          {/* <div className="reg-grid">
             <form onSubmit={handleSubmit}>
               <div className="form-row">
                 <div className="field">
@@ -225,6 +225,9 @@ const Registration = () => {
                 ✦ No On-spot registration 
               </div>
             </div>
+          </div> */}
+          <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto', paddingTop: '1rem' }}>
+            <p style={{ color: 'red', fontSize: '.85rem', fontWeight: 300, lineHeight: 1.75 }}>All event registrations are now closed.</p>
           </div>
         </motion.div>
       </div>
